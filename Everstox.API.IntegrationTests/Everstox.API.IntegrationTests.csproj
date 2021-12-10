@@ -1,0 +1,80 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.2.7" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.2.7" />
+    <PackageReference Include="coverlet.collector" Version="3.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Everstox.API.Shop\Everstox.API.Shop.csproj" />
+    <ProjectReference Include="..\Everstox.API.Warehouses\Everstox.API.Warehouses.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Static_Data\Carriers.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Carriers.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Static_Data\PaymentMethods.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PaymentMethods.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Static_Data\ShipmentOptions.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ShipmentOptions.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Static_Data\Shops.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Shops.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Static_Data\WarehousesData.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>WarehousesData.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Static_Data\Carriers.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Carriers.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Static_Data\PaymentMethods.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>PaymentMethods.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Static_Data\ShipmentOptions.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ShipmentOptions.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Static_Data\Shops.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Shops.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Static_Data\WarehousesData.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>WarehousesData.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Storelogix_Shipments\" />
+    <Folder Include="Xentral_Orders\" />
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
+
+</Project>

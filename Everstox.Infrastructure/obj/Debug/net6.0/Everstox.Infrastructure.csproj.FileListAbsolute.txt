@@ -1,0 +1,12 @@
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.Infrastructure\bin\Debug\net6.0\Everstox.Infrastructure.deps.json
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.Infrastructure\bin\Debug\net6.0\Everstox.Infrastructure.dll
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.Infrastructure\bin\Debug\net6.0\ref\Everstox.Infrastructure.dll
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.Infrastructure\bin\Debug\net6.0\Everstox.Infrastructure.pdb
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.Infrastructure\obj\Debug\net6.0\Everstox.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.Infrastructure\obj\Debug\net6.0\Everstox.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.Infrastructure\obj\Debug\net6.0\Everstox.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.Infrastructure\obj\Debug\net6.0\Everstox.Infrastructure.AssemblyInfo.cs
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.Infrastructure\obj\Debug\net6.0\Everstox.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.Infrastructure\obj\Debug\net6.0\Everstox.Infrastructure.dll
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.Infrastructure\obj\Debug\net6.0\ref\Everstox.Infrastructure.dll
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.Infrastructure\obj\Debug\net6.0\Everstox.Infrastructure.pdb

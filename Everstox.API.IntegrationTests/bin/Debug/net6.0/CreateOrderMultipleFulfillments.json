@@ -1,0 +1,102 @@
+﻿{
+  "order_date": "2021-11-27T10:20:55-00:00",
+  "order_items": [
+    {
+      "custom_attributes": [
+        {
+          "attribute_key": "firstkey",
+          "attribute_value": "001"
+        }
+      ],
+      "product": {
+        "sku": "ArmC"
+      },
+      "quantity": 1,
+      "price_set": [
+        {
+          "tax": "0",
+          "price": "10",
+          "currency": "EUR",
+          "discount": "1",
+          "quantity": 1,
+          "tax_rate": "0"
+        }
+      ],
+      "shipment_options": [
+        {
+          "name": "Standard"
+        }
+      ]
+    },
+    {
+      "custom_attributes": [
+        {
+          "attribute_key": "secondkey",
+          "attribute_value": "002"
+        }
+      ],
+      "product": {
+        "sku": "str8"
+      },
+      "quantity": 1,
+      "price_set": [
+        {
+          "tax": "0",
+          "price": "70",
+          "currency": "EUR",
+          "discount": "5",
+          "quantity": 1,
+          "tax_rate": "0"
+        }
+      ],
+      "shipment_options": [
+        {
+          "name": "Standard"
+        }
+      ]
+    }
+  ],
+  "order_number": "automation2022final",
+  "order_priority": 50,
+  "customer_email": "exampleEmail@es.comm",
+  "shipping_price": {
+    "tax": "0",
+    "price": "0",
+    "currency": "EUR",
+    "discount": "0"
+  },
+  "billing_address": {
+    "zip": "10132",
+    "city": "Napoli",
+    "phone": "",
+    "title": "",
+    "company": "",
+    "country": "Italy",
+    "address_1": "Via del corso",
+    "address_2": "",
+    "last_name": "Giunta",
+    "first_name": "Furio",
+    "country_code": "IT"
+  },
+  "financial_status": "pending",
+  "shipping_address": {
+    "zip": "10132",
+    "city": "Napoli",
+    "phone": "",
+    "company": "",
+    "country": "Italy",
+    "address_1": "Via del corso",
+    "address_2": "",
+    "last_name": "Giunta",
+    "first_name": "Furio",
+    "country_code": "IT"
+  },
+  "shop_instance_id": "bdf12a37-fb7e-490f-97b0-d1c6688029de",
+  "custom_attributes": [
+    {
+      "attribute_key": "shipping_note",
+      "attribute_value": ""
+    }
+  ],
+  "payment_method_id": "dcf7b92e-83e9-415c-8174-4a6005d2927b"
+}

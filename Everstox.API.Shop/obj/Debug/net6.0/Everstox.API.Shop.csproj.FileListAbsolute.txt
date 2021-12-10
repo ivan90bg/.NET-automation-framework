@@ -1,0 +1,17 @@
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Shop\bin\Debug\net6.0\Everstox.API.Shop.deps.json
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Shop\bin\Debug\net6.0\Everstox.API.Shop.dll
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Shop\bin\Debug\net6.0\ref\Everstox.API.Shop.dll
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Shop\bin\Debug\net6.0\Everstox.API.Shop.pdb
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Shop\bin\Debug\net6.0\Everstox.Infrastructure.dll
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Shop\bin\Debug\net6.0\Everstox.Infrastructure.pdb
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Shop\obj\Debug\net6.0\Everstox.API.Shop.csproj.AssemblyReference.cache
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Shop\obj\Debug\net6.0\Everstox.API.Shop.Properties.EverstoxShopResources.resources
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Shop\obj\Debug\net6.0\Everstox.API.Shop.csproj.GenerateResource.cache
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Shop\obj\Debug\net6.0\Everstox.API.Shop.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Shop\obj\Debug\net6.0\Everstox.API.Shop.AssemblyInfoInputs.cache
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Shop\obj\Debug\net6.0\Everstox.API.Shop.AssemblyInfo.cs
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Shop\obj\Debug\net6.0\Everstox.API.Shop.csproj.CoreCompileInputs.cache
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Shop\obj\Debug\net6.0\Everstox.API.Shop.csproj.CopyComplete
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Shop\obj\Debug\net6.0\Everstox.API.Shop.dll
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Shop\obj\Debug\net6.0\ref\Everstox.API.Shop.dll
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Shop\obj\Debug\net6.0\Everstox.API.Shop.pdb

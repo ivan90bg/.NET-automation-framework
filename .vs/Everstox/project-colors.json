@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "d3b06c9c-8342-47bc-b0cf-561feb85fde4": {
+      "ProjectGuid": "d3b06c9c-8342-47bc-b0cf-561feb85fde4",
+      "DisplayName": "Everstox.API.IntegrationTests",
+      "ColorIndex": 0
+    },
+    "c0d36d0d-1983-4e79-814c-d8f3277762de": {
+      "ProjectGuid": "c0d36d0d-1983-4e79-814c-d8f3277762de",
+      "DisplayName": "Everstox.API.Shop",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}
