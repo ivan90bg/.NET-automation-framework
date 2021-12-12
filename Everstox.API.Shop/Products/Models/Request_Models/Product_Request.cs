@@ -30,11 +30,12 @@ namespace Everstox.API.Shop.Products.Models.Request_Models
         public string size { get; set; }
         public string sku { get; set; }
         public string status { get; set; }
-        public List<Unit> units { get; set; }
+        public List<Unit_Req> units { get; set; }
     }
 
     public class Bundle
     {
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string product_id { get; set; }
         public string product_sku { get; set; }
         public int quantity { get; set; }
@@ -53,16 +54,16 @@ namespace Everstox.API.Shop.Products.Models.Request_Models
         public string url { get; set; }
     }
 
-    public class Unit
+    public class Unit_Req
     {
         public bool default_unit { get; set; }
         public string gtin { get; set; }
-        public int height_in_cm { get; set; }
-        public int length_in_cm { get; set; }
+        public float height_in_cm { get; set; }
+        public float length_in_cm { get; set; }
         public string name { get; set; }
-        public int quantity_of_base_unit { get; set; }
-        public int weight_gross_in_kg { get; set; }
-        public int weight_net_in_kg { get; set; }
-        public int width_in_cm { get; set; }
+        public float quantity_of_base_unit { get; set; }
+        public float weight_gross_in_kg { get; set; }
+        public float weight_net_in_kg { get; set; }
+        public float width_in_cm { get; set; }
     }
 }

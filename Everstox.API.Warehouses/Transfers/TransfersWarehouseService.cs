@@ -13,30 +13,30 @@ namespace Everstox.API.Warehouses.Transfers
         private const string TransfersUrl = "transfers";
 
 
-        public async Task<IRestResponse<Transfer_Response_Model>> AcceptTransfer(string warehouseId, string _apiValue, Accept_Transfer_Model transfer)
+        public async Task<IRestResponse<Transfer_Response>> AcceptTransfer(string warehouseId, string _apiValue, TransferAccept_Request transfer)
         {
             var client = new RestClientHandler($"{EverstoxWarehousesResources.WarehouseBaseUrl}/{warehouseId}/{TransfersUrl}/accept");
             RestRequest request = new RequestBuilder()
                 .AddApiKeyAuthorization(_apiKey, _apiValue)
-                .AddRequestBody<Accept_Transfer_Model>(transfer)
+                .AddRequestBody<TransferAccept_Request>(transfer)
                 .SetContentType()
                 .SetHttpMethod(Method.POST)
                 .Build();
 
-            return await client.ExecuteAsync<Transfer_Response_Model>(request);
+            return await client.ExecuteAsync<Transfer_Response>(request);
         }
 
-        public async Task<IRestResponse<Transfer_Shipment_Response_Model>> ReceiveTransferShipment(string warehouseId, string _apiValue, Receive_TransferShipment_Model receive_TransferShipment)
+        public async Task<IRestResponse<TransferShipment_Response>> ReceiveTransferShipment(string warehouseId, string _apiValue, TransferShipment_Request receive_TransferShipment)
         {
             var client = new RestClientHandler($"{EverstoxWarehousesResources.WarehouseBaseUrl}/{warehouseId}/{TransfersUrl}/received_shipment");
             RestRequest request = new RequestBuilder()
                 .AddApiKeyAuthorization(_apiKey, _apiValue)
-                .AddRequestBody<Receive_TransferShipment_Model>(receive_TransferShipment)
+                .AddRequestBody<TransferShipment_Request>(receive_TransferShipment)
                 .SetContentType()
                 .SetHttpMethod(Method.POST)
                 .Build();
 
-            return await client.ExecuteAsync<Transfer_Shipment_Response_Model>(request);
+            return await client.ExecuteAsync<TransferShipment_Response>(request);
         }
     }
 }

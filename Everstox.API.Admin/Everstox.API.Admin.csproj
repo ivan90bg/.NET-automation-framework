@@ -8,8 +8,32 @@
 
   <ItemGroup>
     <Folder Include="Carriers\" />
+    <Folder Include="Imports\Models\Request_Models\" />
     <Folder Include="Shipment Options\" />
     <Folder Include="Orders\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="RestSharp" Version="106.15.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Everstox.Infrastructure\Everstox.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\EverstoxAdminResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>EverstoxAdminResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\EverstoxAdminResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EverstoxAdminResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

@@ -1601,6 +1601,20 @@
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
       },
+      "Everstox.API.Admin/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Everstox.Infrastructure": "1.0.0",
+          "RestSharp": "106.15.0"
+        },
+        "compile": {
+          "bin/placeholder/Everstox.API.Admin.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Everstox.API.Admin.dll": {}
+        }
+      },
       "Everstox.API.Shop/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -6055,6 +6069,11 @@
         "system.xml.xdocument.nuspec"
       ]
     },
+    "Everstox.API.Admin/1.0.0": {
+      "type": "project",
+      "path": "../Everstox.API.Admin/Everstox.API.Admin.csproj",
+      "msbuildProject": "../Everstox.API.Admin/Everstox.API.Admin.csproj"
+    },
     "Everstox.API.Shop/1.0.0": {
       "type": "project",
       "path": "../Everstox.API.Shop/Everstox.API.Shop.csproj",
@@ -6073,6 +6092,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Everstox.API.Admin >= 1.0.0",
       "Everstox.API.Shop >= 1.0.0",
       "Everstox.API.Warehouses >= 1.0.0",
       "MSTest.TestAdapter >= 2.2.7",
@@ -6113,6 +6133,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
+            "C:\\Users\\Ivan\\.NET Projects\\Everstox\\Everstox.API.Admin\\Everstox.API.Admin.csproj": {
+              "projectPath": "C:\\Users\\Ivan\\.NET Projects\\Everstox\\Everstox.API.Admin\\Everstox.API.Admin.csproj"
+            },
             "C:\\Users\\Ivan\\.NET Projects\\Everstox\\Everstox.API.Shop\\Everstox.API.Shop.csproj": {
               "projectPath": "C:\\Users\\Ivan\\.NET Projects\\Everstox\\Everstox.API.Shop\\Everstox.API.Shop.csproj"
             },

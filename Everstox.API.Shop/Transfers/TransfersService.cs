@@ -28,7 +28,7 @@ namespace Everstox.API.Shop.Transfers
             return await client.ExecuteAsync<List<object>>(request);
         }
 
-        public async Task<IRestResponse<Transfer_Response_Model>> GetSingleTransfer(string shopId, string transferId)
+        public async Task<IRestResponse<Transfer_Response>> GetSingleTransfer(string shopId, string transferId)
         {
             var client = new RestClientHandler($"{EverstoxShopResources.ShopBaseUrl}/{shopId}/{TransfersUrl}/{transferId}");
             RestRequest request = new RequestBuilder()
@@ -37,34 +37,34 @@ namespace Everstox.API.Shop.Transfers
                 .SetHttpMethod(Method.GET)
                 .Build();
 
-            return await client.ExecuteAsync<Transfer_Response_Model>(request);
+            return await client.ExecuteAsync<Transfer_Response>(request);
         }
 
 
-        public async Task<IRestResponse<Transfer_Response_Model>> CreateTransfer(string shopId, Transfer_Request_Model transfer)
+        public async Task<IRestResponse<Transfer_Response>> CreateTransfer(string shopId, Transfer_Request transfer)
         {
             var client = new RestClientHandler($"{EverstoxShopResources.ShopBaseUrl}/{shopId}/{TransfersUrl}");
             RestRequest request = new RequestBuilder()
                 .AddAuthorization(_token)
-                .AddRequestBody<Transfer_Request_Model>(transfer)
+                .AddRequestBody<Transfer_Request>(transfer)
                 .SetContentType()
                 .SetHttpMethod(Method.POST)
                 .Build();
 
-            return await client.ExecuteAsync<Transfer_Response_Model>(request);
+            return await client.ExecuteAsync<Transfer_Response>(request);
         }
 
-        public async Task<IRestResponse<Transfer_Response_Model>> CompleteTransfer(string shopId, string transferId, Complete_Transfer_Model model)
+        public async Task<IRestResponse<Transfer_Response>> CompleteTransfer(string shopId, string transferId, TransferComplete_Request model)
         {
             var client = new RestClientHandler($"{EverstoxShopResources.ShopBaseUrl}/{shopId}/{TransfersUrl}/{transferId}/complete");
             RestRequest request = new RequestBuilder()
                 .AddAuthorization(_token)
-                .AddRequestBody<Complete_Transfer_Model>(model)
+                .AddRequestBody<TransferComplete_Request>(model)
                 .SetContentType()
                 .SetHttpMethod(Method.POST)
                 .Build();
 
-            return await client.ExecuteAsync<Transfer_Response_Model>(request);
+            return await client.ExecuteAsync<Transfer_Response>(request);
         }
 
         public async Task<IRestResponse<object>> DeleteTransfer(string shopId, string transferId)

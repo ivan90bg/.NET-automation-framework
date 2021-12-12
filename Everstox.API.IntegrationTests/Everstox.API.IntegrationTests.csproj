@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Everstox.API.Admin\Everstox.API.Admin.csproj" />
     <ProjectReference Include="..\Everstox.API.Shop\Everstox.API.Shop.csproj" />
     <ProjectReference Include="..\Everstox.API.Warehouses\Everstox.API.Warehouses.csproj" />
   </ItemGroup>

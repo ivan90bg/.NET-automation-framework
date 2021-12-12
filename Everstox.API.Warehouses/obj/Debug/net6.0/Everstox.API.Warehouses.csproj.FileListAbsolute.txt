@@ -2,7 +2,9 @@ C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Warehouses\bin\Debug\net6.0\Ev
 C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Warehouses\bin\Debug\net6.0\Everstox.API.Warehouses.dll
 C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Warehouses\bin\Debug\net6.0\ref\Everstox.API.Warehouses.dll
 C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Warehouses\bin\Debug\net6.0\Everstox.API.Warehouses.pdb
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Warehouses\bin\Debug\net6.0\Everstox.API.Shop.dll
 C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Warehouses\bin\Debug\net6.0\Everstox.Infrastructure.dll
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Warehouses\bin\Debug\net6.0\Everstox.API.Shop.pdb
 C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Warehouses\bin\Debug\net6.0\Everstox.Infrastructure.pdb
 C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Warehouses\obj\Debug\net6.0\Everstox.API.Warehouses.csproj.AssemblyReference.cache
 C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Warehouses\obj\Debug\net6.0\Everstox.API.Warehouses.Properties.EverstoxWarehousesResources.resources
@@ -15,5 +17,3 @@ C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Warehouses\obj\Debug\net6.0\Ev
 C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Warehouses\obj\Debug\net6.0\Everstox.API.Warehouses.dll
 C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Warehouses\obj\Debug\net6.0\ref\Everstox.API.Warehouses.dll
 C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Warehouses\obj\Debug\net6.0\Everstox.API.Warehouses.pdb
-C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Warehouses\bin\Debug\net6.0\Everstox.API.Shop.dll
-C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.Warehouses\bin\Debug\net6.0\Everstox.API.Shop.pdb

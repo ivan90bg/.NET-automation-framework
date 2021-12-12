@@ -12,30 +12,30 @@ namespace Everstox.API.Warehouses.Shipments
         private const string ShipmentsUrl = "shipments";
 
 
-        public async Task<IRestResponse<Shipment_Response_Model>> CreateShipment(string warehouseId, string _apiValue, Shipment_Creation_Model shipment)
+        public async Task<IRestResponse<Shipment_Response>> CreateShipment(string warehouseId, string _apiValue, Shipment_Request shipment)
         {
             var client = new RestClientHandler($"{EverstoxWarehousesResources.WarehouseBaseUrl}/{warehouseId}/{ShipmentsUrl}");
             RestRequest request = new RequestBuilder()
                 .AddApiKeyAuthorization(_apiKey, _apiValue)
-                .AddRequestBody<Shipment_Creation_Model>(shipment)
+                .AddRequestBody<Shipment_Request>(shipment)
                 .SetContentType()
                 .SetHttpMethod(Method.POST)
                 .Build();
 
-            return await client.ExecuteAsync<Shipment_Response_Model>(request);
+            return await client.ExecuteAsync<Shipment_Response>(request);
         }
 
-        public async Task<IRestResponse<Shipment_Update_Response_Model>> UpdateShipment(string warehouseId, string _apiValue, string shipment_id, Shipment_Update_Model shipmentUpdate)
+        public async Task<IRestResponse<Shipment_Update_Response>> UpdateShipment(string warehouseId, string _apiValue, string shipment_id, Shipment_Update_Request shipmentUpdate)
         {
             var client = new RestClientHandler($"{EverstoxWarehousesResources.WarehouseBaseUrl}/{warehouseId}/{ShipmentsUrl}/{shipment_id}");
             RestRequest request = new RequestBuilder()
                 .AddApiKeyAuthorization(_apiKey, _apiValue)
-                .AddRequestBody<Shipment_Update_Model>(shipmentUpdate)
+                .AddRequestBody<Shipment_Update_Request>(shipmentUpdate)
                 .SetContentType()
                 .SetHttpMethod(Method.PUT)
                 .Build();
 
-            return await client.ExecuteAsync<Shipment_Update_Response_Model>(request);
+            return await client.ExecuteAsync<Shipment_Update_Response>(request);
         }
     }
 }

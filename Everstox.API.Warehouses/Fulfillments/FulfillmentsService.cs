@@ -12,7 +12,7 @@ namespace Everstox.API.Warehouses.Fulfillments
         private const string FulfillmentsUrl = "fulfillments";
 
 
-        public async Task<IRestResponse<List<Fulfillment_Response_Model>>> GetFulfillments(string warehouseId, string _apiValue)
+        public async Task<IRestResponse<List<Fulfillment_Response>>> GetFulfillments(string warehouseId, string _apiValue)
         {
             var client = new RestClientHandler($"{EverstoxWarehousesResources.WarehouseBaseUrl}/{warehouseId}/{FulfillmentsUrl}");
             RestRequest request = new RequestBuilder()
@@ -21,21 +21,21 @@ namespace Everstox.API.Warehouses.Fulfillments
                 .SetHttpMethod(Method.GET)
                 .Build();
 
-            return await client.ExecuteAsync<List<Fulfillment_Response_Model>>(request);
+            return await client.ExecuteAsync<List<Fulfillment_Response>>(request);
         }
 
 
-        public async Task<IRestResponse<Fulfillment_Response_Model>> FulfillmentsAction(string warehouseId, string action, string _apiValue, List<Fulfillment_Request_Model> fulfillment)
+        public async Task<IRestResponse<Fulfillment_Response>> FulfillmentsAction(string warehouseId, string _apiValue, List<Fulfillment_Request> fulfillment, string action = "accept")
         {
             var client = new RestClientHandler($"{EverstoxWarehousesResources.WarehouseBaseUrl}/{warehouseId}/{FulfillmentsUrl}/{action}");
             RestRequest request = new RequestBuilder()
                 .AddApiKeyAuthorization(_apiKey, _apiValue)
-                .AddRequestBody<List<Fulfillment_Request_Model>>(fulfillment)
+                .AddRequestBody<List<Fulfillment_Request>>(fulfillment)
                 .SetContentType()
                 .SetHttpMethod(Method.POST)
                 .Build();
 
-            return await client.ExecuteAsync<Fulfillment_Response_Model>(request);
+            return await client.ExecuteAsync<Fulfillment_Response>(request);
         }
     }
 }

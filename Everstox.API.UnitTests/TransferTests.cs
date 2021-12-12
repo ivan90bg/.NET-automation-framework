@@ -18,14 +18,14 @@ namespace Everstox.API.UnitTests
         [InlineData("Bolec Warehouse", "source for Bolec")]
         public async Task CreateTransfer_WithValidDestination_ShouldReturnCorrectStatusCode(string destination_name, string source)
         {
-            var transfer = new Transfer_Request_Model()
+            var transfer = new Transfer_Request()
             {
                 custom_attributes = new List<CustomAttribute>() { new CustomAttribute() { attribute_key = "custom key1", attribute_value = "custom value1" } },
                 destination_name = destination_name,
                 source = source,
-                transfer_items = new List<TransferItem>() { new TransferItem() { sku = "str8", quantity_announced = 10 },
-                                                            new TransferItem() { sku = "ArmC", quantity_announced = 10 },
-                                                            new TransferItem() { sku = "beer", quantity_announced = 10 }},
+                transfer_items = new List<TransferItem_T>() { new TransferItem_T() { sku = "str8", quantity_announced = 10 },
+                                                            new TransferItem_T() { sku = "ArmC", quantity_announced = 10 },
+                                                            new TransferItem_T() { sku = "beer", quantity_announced = 10 }},
                 transfer_number = $"Transfer - {Guid.NewGuid()}"
             };
             

@@ -1680,10 +1680,25 @@
           "build/netcoreapp2.1/xunit.runner.visualstudio.props": {}
         }
       },
+      "Everstox.API.Admin/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Everstox.Infrastructure": "1.0.0",
+          "RestSharp": "106.15.0"
+        },
+        "compile": {
+          "bin/placeholder/Everstox.API.Admin.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Everstox.API.Admin.dll": {}
+        }
+      },
       "Everstox.API.IntegrationTests/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "Everstox.API.Admin": "1.0.0",
           "Everstox.API.Shop": "1.0.0",
           "Everstox.API.Warehouses": "1.0.0",
           "MSTest.TestAdapter": "2.2.7",
@@ -6286,6 +6301,11 @@
         "xunit.runner.visualstudio.2.4.3.nupkg.sha512",
         "xunit.runner.visualstudio.nuspec"
       ]
+    },
+    "Everstox.API.Admin/1.0.0": {
+      "type": "project",
+      "path": "../Everstox.API.Admin/Everstox.API.Admin.csproj",
+      "msbuildProject": "../Everstox.API.Admin/Everstox.API.Admin.csproj"
     },
     "Everstox.API.IntegrationTests/1.0.0": {
       "type": "project",
