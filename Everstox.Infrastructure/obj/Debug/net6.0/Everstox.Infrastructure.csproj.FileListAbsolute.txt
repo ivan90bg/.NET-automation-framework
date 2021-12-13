@@ -9,3 +9,4 @@ C:\Users\Ivan\.NET Projects\Everstox\Everstox.Infrastructure\obj\Debug\net6.0\Ev
 C:\Users\Ivan\.NET Projects\Everstox\Everstox.Infrastructure\obj\Debug\net6.0\Everstox.Infrastructure.dll
 C:\Users\Ivan\.NET Projects\Everstox\Everstox.Infrastructure\obj\Debug\net6.0\ref\Everstox.Infrastructure.dll
 C:\Users\Ivan\.NET Projects\Everstox\Everstox.Infrastructure\obj\Debug\net6.0\Everstox.Infrastructure.pdb
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.Infrastructure\obj\Debug\net6.0\Everstox.Infrastructure.csproj.AssemblyReference.cache

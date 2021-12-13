@@ -16,7 +16,7 @@ namespace Everstox.API.Shop.Products
             _token = string.IsNullOrEmpty(token) ? "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Mzk2ODY5NDksImlhdCI6MTYzNzA5NDk0OSwic3ViIjoiNmU1ODkzMDQtMDA0ZC00ODVlLTk0NjQtZWJkNWUwMTY4OTFkIn0.DGnKspMn7wdz2gfZtnEzWIW1IW4LoMViC-w9BgmjS0w" : token;
         }
 
-        public async Task<IRestResponse<List<Product_Response>>> GetProducts(string shopId)
+        public async Task<IRestResponse<ProductList_Response>> GetProducts(string shopId)
         {
             var client = new RestClientHandler($"{EverstoxShopResources.ShopBaseUrl}/{shopId}/{ProductsUrl}");
             RestRequest request = new RequestBuilder()
@@ -25,10 +25,10 @@ namespace Everstox.API.Shop.Products
                 .SetHttpMethod(Method.GET)
                 .Build();
 
-            return await client.ExecuteAsync<List<Product_Response>>(request);
+            return await client.ExecuteAsync<ProductList_Response>(request);
         }
 
-        public async Task<IRestResponse<Product_Response>> GetSingleProduct(string shopId, string productId)
+        public async Task<IRestResponse<ProductList_Response>> GetSingleProductById(string shopId, string productId)
         {
             var client = new RestClientHandler($"{EverstoxShopResources.ShopBaseUrl}/{shopId}/{ProductsUrl}/{productId}");
             RestRequest request = new RequestBuilder()
@@ -37,9 +37,21 @@ namespace Everstox.API.Shop.Products
                 .SetHttpMethod(Method.GET)
                 .Build();
 
-            return await client.ExecuteAsync<Product_Response>(request);
+            return await client.ExecuteAsync<ProductList_Response>(request);
         }
 
+        public async Task<IRestResponse<ProductList_Response>> GetProductByName(string shopId, string productName)
+        {
+            var client = new RestClientHandler($"{EverstoxShopResources.ShopBaseUrl}/{shopId}/{ProductsUrl}");
+            RestRequest request = new RequestBuilder()
+                .AddAuthorization(_token)
+                .SetContentType()
+                .AddQuery("name", productName)
+                .SetHttpMethod(Method.GET)
+                .Build();
+
+            return await client.ExecuteAsync<ProductList_Response>(request);
+        }
 
         public async Task<IRestResponse<Product_Response>> CreateProduct(string shopId, Product_Request product)
         {
@@ -49,6 +61,19 @@ namespace Everstox.API.Shop.Products
                 .AddRequestBody<Product_Request>(product)
                 .SetContentType()
                 .SetHttpMethod(Method.POST)
+                .Build();
+
+            return await client.ExecuteAsync<Product_Response>(request);
+        }
+
+        public async Task<IRestResponse<Product_Response>> UpdateProduct(string shopId, string productId, Product_Request product)
+        {
+            var client = new RestClientHandler($"{EverstoxShopResources.ShopBaseUrl}/{shopId}/{ProductsUrl}/{productId}");
+            RestRequest request = new RequestBuilder()
+                .AddAuthorization(_token)
+                .AddRequestBody<Product_Request>(product)
+                .SetContentType()
+                .SetHttpMethod(Method.PUT)
                 .Build();
 
             return await client.ExecuteAsync<Product_Response>(request);

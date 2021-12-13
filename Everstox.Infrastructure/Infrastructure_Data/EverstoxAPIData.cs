@@ -47,10 +47,12 @@ namespace Everstox.Infrastructure.Infrastructure_Data
             Accepted_by_connector = 1,
             [EnumValue("cancellation_pending_by_warehouse")]
             Cancellation_pending_by_warehouse = 2,
+            [EnumValue("canceled")]
+            Canceled = 3,
             [EnumValue("completed")]
-            Completed = 3,
+            Completed = 4,
             [EnumValue("rejected")]
-            Rejected = 4
+            Rejected = 5
 
         }
 

@@ -27,33 +27,6 @@
           "name": "Standard"
         }
       ]
-    },
-    {
-      "custom_attributes": [
-        {
-          "attribute_key": "Test attribute key",
-          "attribute_value": "Test attribute value"
-        }
-      ],
-      "product": {
-        "sku": "JBL_H"
-      },
-      "quantity": 5,
-      "price_set": [
-        {
-          "tax": "0",
-          "price": "100",
-          "currency": "EUR",
-          "discount": "0",
-          "quantity": 5,
-          "tax_rate": "0"
-        }
-      ],
-      "shipment_options": [
-        {
-          "name": "Standard"
-        }
-      ]
     }
   ],
   "order_number": "order_number",
