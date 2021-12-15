@@ -2,7 +2,7 @@
 
 namespace Everstox.Infrastructure
 {
-    public class SFTPHandlers
+    public static class SFTPHandlers
     {
         public static void UploadSFTPXentral(string filename)
         {
@@ -10,10 +10,10 @@ namespace Everstox.Infrastructure
             {
                 client.Connect();
 
-                string sourceFile = @"C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.IntegrationTests\Xentral_Orders" + filename;
+                string sourceFile = @"C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.IntegrationTests\Xentral_Orders\" + filename;
                 using (Stream stream = File.OpenRead(sourceFile))
                 {
-                    client.UploadFile(stream, @"\export\" + Path.GetFileName(sourceFile));
+                    client.UploadFile(stream, @"/export/" + Path.GetFileName(sourceFile));
                 }
 
                 client.Disconnect();
@@ -28,7 +28,7 @@ namespace Everstox.Infrastructure
                 client.Connect();
 
 
-                string serverFile = @"\import\" + filename;
+                string serverFile = @"/import/" + filename;
                 string localFile = @"C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.IntegrationTests\Storelogix_Shipments\" + shipmentname;
 
                 using (Stream stream = File.OpenWrite(localFile))

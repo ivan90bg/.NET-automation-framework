@@ -29,6 +29,20 @@ namespace Everstox.API.Shop.Orders
             return await client.ExecuteAsync<OrderList_Response>(request);
         }
 
+        public async Task<IRestResponse<OrderList_Response>> GetLastCreatedOrder(string shopId)
+        {
+            var client = new RestClientHandler($"{EverstoxShopResources.ShopBaseUrl}/{shopId}/{OrderUrl}");
+            RestRequest request = new RequestBuilder()
+                .AddAuthorization(_token)
+                .SetContentType()
+                .AddQuery("limit", "1")
+                .AddQuery("stategroup", "all")
+                .SetHttpMethod(Method.GET)
+                .Build();
+
+            return await client.ExecuteAsync<OrderList_Response>(request);
+        }
+
         public async Task<IRestResponse<Order_Response>> GetSingleOrder(string shopId, string orderId)
         {
             var client = new RestClientHandler($"{EverstoxShopResources.ShopBaseUrl}/{shopId}/{OrderUrl}/{orderId}");
