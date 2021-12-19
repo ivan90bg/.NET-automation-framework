@@ -22,7 +22,7 @@ namespace Everstox.API.IntegrationTests.OrderFlowIntegrationTests
     [TestClass]
     public class CreateOrder_MultipleProducts_MultipleFullfilments_Test
     {
-        [DeploymentItem(@"C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.IntegrationTests\Test_Data\OrderWithMultipleFulfillments.json")]
+        [DeploymentItem(".\\Test_Data\\")]
         [TestMethod]
         public async Task CreateOrder_WithProvidedFileWithMultipleFulfillments_ShouldReturnCorrectStatusCode()
         {
@@ -140,7 +140,7 @@ namespace Everstox.API.IntegrationTests.OrderFlowIntegrationTests
         private static Order_Request GenerateOrderRequestFromJson(string fileName)
         {
             var orderRequest = RequestDeserializer.Deserialize<Order_Request>(fileName);
-            orderRequest.order_number = $"Order - {Guid.NewGuid()}";
+            orderRequest.order_number = $"Order{Guid.NewGuid().ToString().Replace("-", "").Substring(0, 6)}";
             orderRequest.order_date = DateTime.Now;
             return orderRequest;
         }

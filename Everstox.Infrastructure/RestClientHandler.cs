@@ -15,5 +15,11 @@ namespace Everstox.Infrastructure
          var restClient = new RestClient(_url);
          return await restClient.ExecuteAsync<TResponse>(request);
       }
-   }
+
+      public async Task<IRestResponse> ExecuteAsync(RestRequest request)
+      {
+          var restClient = new RestClient(_url);
+          return await restClient.ExecuteAsync(request);
+      }
+    }
 }

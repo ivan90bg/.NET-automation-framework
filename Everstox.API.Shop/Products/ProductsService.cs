@@ -13,7 +13,7 @@ namespace Everstox.API.Shop.Products
 
         public ProductsService(string token = "")
         {
-            _token = string.IsNullOrEmpty(token) ? "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Mzk2ODY5NDksImlhdCI6MTYzNzA5NDk0OSwic3ViIjoiNmU1ODkzMDQtMDA0ZC00ODVlLTk0NjQtZWJkNWUwMTY4OTFkIn0.DGnKspMn7wdz2gfZtnEzWIW1IW4LoMViC-w9BgmjS0w" : token;
+            _token = string.IsNullOrEmpty(token) ? "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NDI1MjQ2NjUsImlhdCI6MTYzOTkzMjY2NSwic3ViIjoiNmU1ODkzMDQtMDA0ZC00ODVlLTk0NjQtZWJkNWUwMTY4OTFkIn0.N5I268aP4X7Qe7c7LRjXD1FHkH5h___L99xQSG09nEM" : token;
         }
 
         public async Task<IRestResponse<ProductList_Response>> GetProducts(string shopId)
@@ -79,7 +79,7 @@ namespace Everstox.API.Shop.Products
             return await client.ExecuteAsync<Product_Response>(request);
         }
 
-        public async Task<IRestResponse<object>> DeleteProduct(string shopId, string productId)
+        public async Task<IRestResponse> DeleteProduct(string shopId, string productId)
         {
             var client = new RestClientHandler($"{EverstoxShopResources.ShopBaseUrl}/{shopId}/{ProductsUrl}/{productId}");
             RestRequest request = new RequestBuilder()
@@ -88,7 +88,7 @@ namespace Everstox.API.Shop.Products
                 .SetHttpMethod(Method.DELETE)
                 .Build();
 
-            return await client.ExecuteAsync<object>(request);
+            return await client.ExecuteAsync(request);
         }
 
     }

@@ -22,7 +22,7 @@ namespace Everstox.API.IntegrationTests.OrderFlowIntegrationTests
     [TestClass]
     public class CreateOrder_SingleProduct_Flow_Test
     {
-        [DeploymentItem(@"C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.IntegrationTests\Test_Data\CreateOrderSingleFulfillment.json")]
+        [DeploymentItem(".\\Test_Data\\")]
         [TestMethod]
         public async Task CreateOrder_SingleOrderItem_Flow_ShouldReturnCorrectStatusCode()
         {
@@ -108,7 +108,7 @@ namespace Everstox.API.IntegrationTests.OrderFlowIntegrationTests
         private static Order_Request GenerateOrderRequest(string fileName)
         {
             var orderRequest = RequestDeserializer.Deserialize<Order_Request>(fileName);
-            orderRequest.order_number = $"Order - {Guid.NewGuid()}";
+            orderRequest.order_number = $"Order{Guid.NewGuid().ToString().Replace("-", "").Substring(0, 6)}";
             orderRequest.order_date = DateTime.Now;
             return orderRequest;
         }

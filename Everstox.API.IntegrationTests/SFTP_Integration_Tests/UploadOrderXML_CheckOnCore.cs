@@ -3,11 +3,11 @@ using Everstox.API.Shop.Orders;
 using Everstox.Infrastructure;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RestSharp;
-using System;
-using System.IO;
+using System.Linq;
 using System.Net;
-using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using System.Xml.XPath;
 
 namespace Everstox.API.IntegrationTests.SFTP_Integration_Tests
 {
@@ -15,34 +15,59 @@ namespace Everstox.API.IntegrationTests.SFTP_Integration_Tests
     public class UploadOrderXML_CheckOnCore
     {
         [DataTestMethod]
-        [DataRow("TestOrder1.xml", "automationSFTP1", "automationSFTP1.xml", "shipment1.xml")]
-        [DataRow("TestOrder2.xml", "automationSFTP2", "automationSFTP2.xml", "shipment2.xml")]
-        [DataRow("TestOrder3.xml", "automationSFTP3", "automationSFTP3.xml", "shipment3.xml")]
-        public async Task UploadOrderXML_CheckOnCore_ShouldReturnCorrectStatusCode(string xentralOrderXML, string expectedName, string shipmentName, string shipmentNewName) 
+        [DataRow("TestOrder1", "TestFulfillment_1")]
+        public async Task UploadOrderXML_CheckOnCore_ShouldReturnCorrectStatusCode(string xentralOrderXML, string newFulfillmentName) 
         {
             SFTPHandlers.UploadSFTPXentral(xentralOrderXML);
 
             var triggerResponse = await XentralSyncTrigger();
             Assert.AreEqual(HttpStatusCode.OK, triggerResponse.StatusCode, triggerResponse.Content.ToString());
 
-            Thread.Sleep(6000);
+            await Task.Delay(6000);
+
+            var orderNumber = XMLOrderValueExtractor(xentralOrderXML, "auftrag");
 
             var orderService = new OrderService();
-            var orderResponse = await orderService.GetLastCreatedOrder(Shops.QA1Shop_Id);
+            var orderResponse = await orderService.GetOrderByNumber(Shops.QA1Shop_Id, orderNumber);
 
             Assert.AreEqual(HttpStatusCode.OK, orderResponse.StatusCode, orderResponse.Content.ToString());
-            Assert.AreEqual(expectedName, orderResponse.Data.items[0].order_number, orderResponse.Content.ToString());
+            Assert.AreEqual(orderNumber, orderResponse.Data.items[0].order_number, orderResponse.Content.ToString());
 
-            Thread.Sleep(9000);
-            SFTPHandlers.DownloadSFTPStorelogix(shipmentName, shipmentNewName);
+            await Task.Delay(9000);
+            SFTPHandlers.DownloadSFTPStorelogix(orderNumber, newFulfillmentName);
 
+            var orderCity = XMLOrderValueExtractor(xentralOrderXML, "rechnung_ort");
+            var fulfillmentCity = XMLFulfillmentsXpathValueExtractor(newFulfillmentName, "Invoicing/Address/City");
+
+            Assert.AreEqual(orderCity, fulfillmentCity, "Mapped values are not the same!");
         }
 
-        public bool FileExists(string fileName)
+        public string XMLOrderValueExtractor(string fileName, string nodeValue)
         {
-            var workingDirectory = Environment.CurrentDirectory;
-            var file = $"{workingDirectory}/{fileName}";
-            return File.Exists(file);
+            var sourceFile = @"..\..\..\Xentral_Orders\" + fileName + ".xml";
+            var data = XElement.Load(sourceFile);
+            return data.Descendants(nodeValue).FirstOrDefault().Value;
+        }
+
+        public string XMLOrderXpathValueExtractor(string fileName, string nodeValue)
+        {
+            var sourceFile = @"..\..\..\Xentral_Orders\" + fileName + ".xml";
+            var data = XElement.Load(sourceFile);
+            return data.XPathSelectElement($"//*/{nodeValue}").Value;
+        }
+
+        public string XMLFulfillmentValueExtractor(string fileName, string nodeValue)
+        {
+            var sourceFile = @"..\..\..\Storelogix_Fulfillments\" + fileName + ".xml";
+            var data = XElement.Load(sourceFile);
+            return data.Descendants(nodeValue).FirstOrDefault().Value;
+        }
+
+        public string XMLFulfillmentsXpathValueExtractor(string fileName, string nodeValue)
+        {
+            var sourceFile = @"..\..\..\Storelogix_Fulfillments\" + fileName + ".xml";
+            var data = XElement.Load(sourceFile);
+            return data.XPathSelectElement($"//*/{nodeValue}").Value;
         }
 
         public async Task<IRestResponse<object>> XentralSyncTrigger()

@@ -30,7 +30,7 @@ namespace Everstox.API.IntegrationTests.OrderFlowIntegrationTests
     [TestClass]
     public class CreateOrder_InvalidProduct_Cancellation_Test
     {
-        [DeploymentItem(@"C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.IntegrationTests\Test_Data\OrderWithInvalidBatchProduct.json")]
+        [DeploymentItem(".\\Test_Data\\")]
         [TestMethod]
         public async Task CreateOrder_InvalidBatch_CreateBatch_PartialShipment_Cancellation_Test()
         {
@@ -109,10 +109,9 @@ namespace Everstox.API.IntegrationTests.OrderFlowIntegrationTests
                     new ShipmentItem_S {
                         product = new ProductShipment() {
                             sku = lastOrderResponse.Data.items[0].order_items[0].product.sku },
-                    quantity = lastOrderResponse.Data.items[0].order_items[0].quantity - 1 } },
-                tracking_code = "automationtrackingcode",
+                    quantity = lastOrderResponse.Data.items[0].order_items[0].quantity - 1 } },              
                 tracking_codes = new List<string>() { "auto1", "auto2" },
-                tracking_urls = new List<string>() { "automation tracking url" }
+                tracking_urls = new List<string>() { "google.com/auto1", "google.com/auto2" }
             };
         }
 
@@ -241,9 +240,9 @@ namespace Everstox.API.IntegrationTests.OrderFlowIntegrationTests
         private static Order_Request GenerateOrderFromJsonFile(string fileName)
         {
             var orderRequest = RequestDeserializer.Deserialize<Order_Request>(fileName);
-            orderRequest.order_number = $"Order - {Guid.NewGuid()}";
+            orderRequest.order_number = $"Order{Guid.NewGuid().ToString().Replace("-", "").Substring(0,6)}";
             orderRequest.order_date = DateTime.Now;
-            orderRequest.order_items[0].product.sku = $"SKU - {new Random().Next(100000, 1000000)}";
+            orderRequest.order_items[0].product.sku = $"SKU - {Guid.NewGuid().ToString().Replace("-", "").Substring(0, 4)}";
 
             return orderRequest;
         }

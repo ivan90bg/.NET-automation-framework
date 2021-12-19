@@ -14,6 +14,8 @@ namespace Everstox.API.Warehouses.Shipments.Models.Request_Models
         public string order_number { get; set; }
         public DateTime shipment_date { get; set; }
         public List<ShipmentItem_S> shipment_items { get; set; }
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string tracking_code { get; set; }
         public List<string> tracking_codes { get; set; }
         public List<string> tracking_urls { get; set; }

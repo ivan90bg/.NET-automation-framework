@@ -114,3 +114,8 @@ C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.IntegrationTests\obj\Debug\net
 C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.IntegrationTests\obj\Debug\net6.0\ref\Everstox.API.IntegrationTests.dll
 C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.IntegrationTests\obj\Debug\net6.0\Everstox.API.IntegrationTests.pdb
 C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.IntegrationTests\obj\Debug\net6.0\Everstox.API.IntegrationTests.genruntimeconfig.cache
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.IntegrationTests\bin\Debug\net6.0\Test_Data\OrderWithInvalidBatchProduct.json
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.IntegrationTests\bin\Debug\net6.0\Test_Data\OrderWithMultipleFulfillments.json
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.IntegrationTests\bin\Debug\net6.0\Test_Data\OrderWithSingleFulfillment.json
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.IntegrationTests\bin\Debug\net6.0\Test_Data\OrderWithValidBatchProduct.json
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.IntegrationTests\bin\Debug\net6.0\Xentral_Orders\TestOrder1.xml

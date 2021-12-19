@@ -72,8 +72,26 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Storelogix_Shipments\" />
+    <Folder Include="Storelogix_Fulfillments\" />
     <Folder Include="Xentral_Orders\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Test_Data\OrderWithInvalidBatchProduct.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Test_Data\OrderWithMultipleFulfillments.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Test_Data\OrderWithSingleFulfillment.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Test_Data\OrderWithValidBatchProduct.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Xentral_Orders\TestOrder1.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
