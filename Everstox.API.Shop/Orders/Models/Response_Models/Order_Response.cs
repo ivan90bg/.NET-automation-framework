@@ -28,14 +28,14 @@
         public int warehouse_late_hours { get; set; }
     }
 
-    public partial class Attachment
+    public class Attachment
     {
         public string attachment_type { get; set; }
         public string download_url { get; set; }
         public string url { get; set; }
     }
 
-    public partial class BillingAddress
+    public class BillingAddress
     {
         public string address_1 { get; set; }
         public string address_2 { get; set; }
@@ -132,7 +132,6 @@
         public List<string> tracking_codes { get; set; }
         public List<string> tracking_urls { get; set; }
     }
-
     
     public  class Fulfillment
     {

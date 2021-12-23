@@ -16,7 +16,7 @@ namespace Everstox.API.Shop.Products
             _token = string.IsNullOrEmpty(token) ? "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NDI1MjQ2NjUsImlhdCI6MTYzOTkzMjY2NSwic3ViIjoiNmU1ODkzMDQtMDA0ZC00ODVlLTk0NjQtZWJkNWUwMTY4OTFkIn0.N5I268aP4X7Qe7c7LRjXD1FHkH5h___L99xQSG09nEM" : token;
         }
 
-        public async Task<IRestResponse<ProductList_Response>> GetProducts(string shopId)
+        public async Task<IRestResponse<ProductList_Response>> GetAllProducts(string shopId)
         {
             var client = new RestClientHandler($"{EverstoxShopResources.ShopBaseUrl}/{shopId}/{ProductsUrl}");
             RestRequest request = new RequestBuilder()
@@ -28,7 +28,7 @@ namespace Everstox.API.Shop.Products
             return await client.ExecuteAsync<ProductList_Response>(request);
         }
 
-        public async Task<IRestResponse<ProductList_Response>> GetSingleProductById(string shopId, string productId)
+        public async Task<IRestResponse<ProductList_Response>> GetProductById(string shopId, string productId)
         {
             var client = new RestClientHandler($"{EverstoxShopResources.ShopBaseUrl}/{shopId}/{ProductsUrl}/{productId}");
             RestRequest request = new RequestBuilder()

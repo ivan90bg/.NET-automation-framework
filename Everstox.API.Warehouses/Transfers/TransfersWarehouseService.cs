@@ -11,11 +11,12 @@ namespace Everstox.API.Warehouses.Transfers
     {
         private readonly string _apiKey = "everstox-warehouse-api-token";
         private const string TransfersUrl = "transfers";
+        private const string ActionAccept = "accept";
 
 
         public async Task<IRestResponse<Transfer_Response>> AcceptTransfer(string warehouseId, string _apiValue, TransferAccept_Request transfer)
         {
-            var client = new RestClientHandler($"{EverstoxWarehousesResources.WarehouseBaseUrl}/{warehouseId}/{TransfersUrl}/accept");
+            var client = new RestClientHandler($"{EverstoxWarehousesResources.WarehouseBaseUrl}/{warehouseId}/{TransfersUrl}/{ActionAccept}");
             RestRequest request = new RequestBuilder()
                 .AddApiKeyAuthorization(_apiKey, _apiValue)
                 .AddRequestBody<TransferAccept_Request>(transfer)

@@ -4,16 +4,32 @@ namespace Everstox.Infrastructure
 {
     public static class SFTPHandlers
     {
-        static PasswordConnectionInfo qa1_Storelogix_login = new PasswordConnectionInfo("34.253.149.210", "qa1_whc_storelogix", "YJay48TM8Vaqj6Sw");
-        static PasswordConnectionInfo qa1_Xentral_login = new PasswordConnectionInfo("34.253.149.210", "qa1_sc_xentral", "xB26aNqp7euUEErG");
-
-        public static void UploadSFTPXentral(string filename)
+      
+        private static ConnectionInfo GetXentralSftpLogin()
         {
-            using (SftpClient client = new SftpClient(qa1_Xentral_login))
+            var ip = "34.253.149.210";
+            var username = "qa1_sc_xentral";
+            var password = "xB26aNqp7euUEErG";
+
+            return new PasswordConnectionInfo(ip, username, password);
+        }
+
+        private static ConnectionInfo GetStorelogixSftLogin()
+        {
+            var ip = "34.253.149.210";
+            var username = "qa1_whc_storelogix";
+            var password = "YJay48TM8Vaqj6Sw";
+
+            return new PasswordConnectionInfo(ip, username, password);
+        }
+
+        public static void UploadSFTPXentral(string fileName)
+        {
+            using (SftpClient client = new SftpClient(GetXentralSftpLogin()))
             {
                 client.Connect();
 
-                string sourceFile = @"..\..\..\Xentral_Orders\" + filename + ".xml";
+                string sourceFile = @"..\..\..\Xentral_Orders\" + fileName + ".xml";
                 using (Stream stream = File.OpenRead(sourceFile))
                 {
                     client.UploadFile(stream, @"/export/" + Path.GetFileName(sourceFile));
@@ -24,15 +40,15 @@ namespace Everstox.Infrastructure
             }
         }
 
-        public static void DownloadSFTPStorelogix(string filename, string fulfillmentname)
+        public static void DownloadSFTPStorelogix(string fileName, string fulfillmentName)
         {
-            using (SftpClient client = new SftpClient(qa1_Storelogix_login))
+            using (SftpClient client = new SftpClient(GetStorelogixSftLogin()))
             {
                 client.Connect();
 
 
-                string serverFile = @"/import/" + filename + ".xml";
-                string localFile = @"..\..\..\Storelogix_Fulfillments\" + fulfillmentname + ".xml";
+                string serverFile = @"/import/" + fileName + ".xml";
+                string localFile = @"..\..\..\Storelogix_Fulfillments\" + fulfillmentName + ".xml";
 
                 using (Stream stream = File.OpenWrite(localFile))
                 {

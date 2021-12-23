@@ -157,14 +157,44 @@
         public string name { get; set; }
     }
 
+    public class Attachment_O_List
+    {
+        public string attachment_type { get; set; }
+        public string download_url { get; set; }
+        public string url { get; set; }
+    }
+
+    public class ReturnItem_O_List
+    {
+        public string customer_service_state { get; set; }
+        public string id { get; set; }
+        public Product_O_List product { get; set; }
+        public int quantity { get; set; }
+        public string return_reason { get; set; }
+        public string return_reason_code { get; set; }
+        public string stock_state { get; set; }
+    }
+
+    public class Return_O_List
+    {
+        public string id { get; set; }
+        public DateTime? return_date { get; set; }
+        public List<ReturnItem_O_List> return_items { get; set; }
+        public string return_reference { get; set; }
+        public string rma_num { get; set; }
+        public string state { get; set; }
+        public DateTime? updated_date { get; set; }
+        public Warehouse warehouse { get; set; }
+    }
+
     public class Item_O_List
     {
-        public List<object> attachments { get; set; }
+        public List<Attachment_O_List> attachments { get; set; }
         public BillingAddress_O_List billing_address { get; set; }
         public DateTime creation_date { get; set; }
         public List<CustomAttribute_O_List> custom_attributes { get; set; }
         public string customer_email { get; set; }
-        public List<object> errors { get; set; }
+        public List<string> errors { get; set; }
         public string financial_status { get; set; }
         public List<Fulfillment_O_List> fulfillments { get; set; }
         public int hours_late { get; set; }
@@ -177,7 +207,7 @@
         public PaymentMethod_O_List payment_method { get; set; }
         public DateTime requested_delivery_date { get; set; }
         public object requested_warehouse_id { get; set; }
-        public List<object> returns { get; set; }
+        public List<Return_O_List> returns { get; set; }
         public ShippingAddress_O_List shipping_address { get; set; }
         public ShippingPrice_O_List shipping_price { get; set; }
         public string shop_id { get; set; }

@@ -12,7 +12,7 @@ namespace Everstox.API.Warehouses.Fulfillments
         private const string FulfillmentsUrl = "fulfillments";
 
 
-        public async Task<IRestResponse<List<Fulfillment_Response>>> GetFulfillments(string warehouseId, string _apiValue)
+        public async Task<IRestResponse<FulfillmentList_Response>> GetAllFulfillments(string warehouseId, string _apiValue)
         {
             var client = new RestClientHandler($"{EverstoxWarehousesResources.WarehouseBaseUrl}/{warehouseId}/{FulfillmentsUrl}");
             RestRequest request = new RequestBuilder()
@@ -21,9 +21,8 @@ namespace Everstox.API.Warehouses.Fulfillments
                 .SetHttpMethod(Method.GET)
                 .Build();
 
-            return await client.ExecuteAsync<List<Fulfillment_Response>>(request);
+            return await client.ExecuteAsync<FulfillmentList_Response>(request);
         }
-
 
         public async Task<IRestResponse<Fulfillment_Response>> FulfillmentsAction(string warehouseId, string _apiValue, List<Fulfillment_Request> fulfillment, string action = "accept")
         {

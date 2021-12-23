@@ -7,7 +7,6 @@ namespace Everstox.API.Warehouses.Shipments.Models.Request_Models
     {
         public string carrier_id { get; set; }
         public string carrier_name { get; set; }
-
         public string fulfillment_id { get; set; }
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]

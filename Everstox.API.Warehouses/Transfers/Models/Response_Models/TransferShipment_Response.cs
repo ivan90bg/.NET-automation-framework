@@ -4,7 +4,7 @@
     {
         public DateTime ETA { get; set; }
         public DateTime creation_date { get; set; }
-        public List<object> custom_attributes { get; set; }
+        public List<CustomAttribute_Transfer> custom_attributes { get; set; }
         public string destination { get; set; }
         public string destination_name { get; set; }
         public string id { get; set; }
@@ -16,7 +16,13 @@
         public List<TransferShipment> transfer_shipments { get; set; }
     }
 
-    public class Product
+    public class CustomAttribute_Transfer
+    {
+        public string attribute_key { get; set; }
+        public string attribute_value { get; set; }
+    }
+
+    public class Product_Transfer
     {
         public string id { get; set; }
         public string name { get; set; }
@@ -25,9 +31,9 @@
 
     public class TransferItem
     {
-        public List<object> custom_attributes { get; set; }
+        public List<CustomAttribute_Transfer> custom_attributes { get; set; }
         public string id { get; set; }
-        public Product product { get; set; }
+        public Product_Transfer product { get; set; }
         public string product_name { get; set; }
         public int quantity_announced { get; set; }
         public int quantity_received { get; set; }
@@ -39,7 +45,7 @@
     public class TransferShipmentItem
     {
         public string id { get; set; }
-        public Product product { get; set; }
+        public Product_Transfer product { get; set; }
         public string product_name { get; set; }
         public double quantity_received { get; set; }
         public double quantity_stocked { get; set; }

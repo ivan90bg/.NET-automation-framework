@@ -14,13 +14,13 @@ namespace Everstox.API.Shop.Products.Models.Response_Models
         public string color { get; set; }
         public string country_of_origin { get; set; }
         public DateTime creation_date { get; set; }
-        public List<CustomAttribute> custom_attributes { get; set; }
+        public List<CustomAttribute_P_Res> custom_attributes { get; set; }
         public string customs_code { get; set; }
         public string customs_description { get; set; }
         public string id { get; set; }
         public bool ignore_during_import { get; set; }
         public bool ignore_during_shipment { get; set; }
-        public List<ImageUrl> image_urls { get; set; }
+        public List<ImageUrl_P_Res> image_urls { get; set; }
         public object last_stock_update { get; set; }
         public string name { get; set; }
         public string shop_id { get; set; }
@@ -28,25 +28,25 @@ namespace Everstox.API.Shop.Products.Models.Response_Models
         public string sku { get; set; }
         public string status { get; set; }
         public int total_stock { get; set; }
-        public List<Unit> units { get; set; }
+        public List<Unit_P_Res> units { get; set; }
         public DateTime updated_date { get; set; }
         public List<object> warehouses { get; set; }
     }
 
-    public class CustomAttribute
+    public class CustomAttribute_P_Res
     {
         public string attribute_key { get; set; }
         public string attribute_value { get; set; }
     }
 
-    public class ImageUrl
+    public class ImageUrl_P_Res
     {
         public bool @default { get; set; }
         public string name { get; set; }
         public string url { get; set; }
     }
 
-    public class Unit
+    public class Unit_P_Res
     {
         public object base_unit_id { get; set; }
         public object base_unit_name { get; set; }
