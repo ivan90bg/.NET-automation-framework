@@ -20,12 +20,12 @@ namespace Everstox.API.UnitTests
         {
             var transfer = new Transfer_Request()
             {
-                custom_attributes = new List<CustomAttribute>() { new CustomAttribute() { attribute_key = "custom key1", attribute_value = "custom value1" } },
+                custom_attributes = new List<CustomAttribute_T_Req>() { new CustomAttribute_T_Req() { attribute_key = "custom key1", attribute_value = "custom value1" } },
                 destination_name = destination_name,
                 source = source,
-                transfer_items = new List<TransferItem_T>() { new TransferItem_T() { sku = "str8", quantity_announced = 10 },
-                                                            new TransferItem_T() { sku = "ArmC", quantity_announced = 10 },
-                                                            new TransferItem_T() { sku = "beer", quantity_announced = 10 }},
+                transfer_items = new List<TransferItem_T_Req>() { new TransferItem_T_Req() { sku = "str8", quantity_announced = 10 },
+                                                            new TransferItem_T_Req() { sku = "ArmC", quantity_announced = 10 },
+                                                            new TransferItem_T_Req() { sku = "beer", quantity_announced = 10 }},
                 transfer_number = $"Transfer - {Guid.NewGuid()}"
             };
             

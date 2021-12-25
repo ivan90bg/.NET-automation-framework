@@ -119,3 +119,8 @@ C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.UnitTests\obj\Debug\net6.0\Eve
 C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.UnitTests\obj\Debug\net6.0\ref\Everstox.API.UnitTests.dll
 C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.UnitTests\obj\Debug\net6.0\Everstox.API.UnitTests.pdb
 C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.UnitTests\obj\Debug\net6.0\Everstox.API.UnitTests.genruntimeconfig.cache
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.UnitTests\bin\Debug\net6.0\Test_Data\OrderWithInvalidBatchProduct.json
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.UnitTests\bin\Debug\net6.0\Test_Data\OrderWithMultipleFulfillments.json
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.UnitTests\bin\Debug\net6.0\Test_Data\OrderWithSingleFulfillment.json
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.UnitTests\bin\Debug\net6.0\Test_Data\OrderWithValidBatchProduct.json
+C:\Users\Ivan\.NET Projects\Everstox\Everstox.API.UnitTests\bin\Debug\net6.0\Xentral_Orders\TestOrder1.xml
