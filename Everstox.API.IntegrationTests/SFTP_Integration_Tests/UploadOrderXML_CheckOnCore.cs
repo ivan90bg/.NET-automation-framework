@@ -1,4 +1,6 @@
-﻿using Everstox.API.IntegrationTests.Static_Data;
+﻿using System;
+using System.Diagnostics;
+using Everstox.API.IntegrationTests.Static_Data;
 using Everstox.API.Shop.Orders;
 using Everstox.API.Shop.Orders.Models.Response_Models;
 using Everstox.Infrastructure;
@@ -10,6 +12,8 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.XPath;
+using Polly;
+using Renci.SshNet;
 
 namespace Everstox.API.IntegrationTests.SFTP_Integration_Tests
 {
@@ -22,21 +26,34 @@ namespace Everstox.API.IntegrationTests.SFTP_Integration_Tests
         {
 
             SFTPHandlers.UploadSFTPXentral(xentralOrderXML);
-            var orderNumber = XMLOrderValueExtractor(xentralOrderXML, "auftrag");
+            var orderNumber = XmlOrderSingleValueExtractor(xentralOrderXML, "auftrag");
 
             var triggerResponse = await XentralSyncTrigger();
             ValidateTriggeredResponseOnXentral(triggerResponse);
 
-            await Task.Delay(6000);
+            PolicyResult<IRestResponse<OrderList_Response>>? orderResponse = await Policy
+                .Handle<Exception>()
+                .OrResult<IRestResponse<OrderList_Response>>(r => !r.IsSuccessful || r.Data.count < 1)
+                .WaitAndRetryAsync(
+                    3,
+                    retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
+                    (response, timeSpan, retryAttempt, context) =>
+                    {
+                        Debug.WriteLine(retryAttempt);
+                        Debug.WriteLine(timeSpan);
+                        Debug.WriteLine(response.Result.Content);
+                    })
+                .ExecuteAndCaptureAsync(async () => await GerOrderByNameFromXML(orderNumber));
 
-            var orderResponse = await GerOrderByNameFromXML(orderNumber);
-            ValidateXentralOrderIsOnCore(orderNumber, orderResponse);
+
+            ValidateXentralOrderIsOnCore(orderNumber, orderResponse.Result);
 
             await Task.Delay(9000);
 
-            SFTPHandlers.DownloadSFTPStorelogix(orderNumber, newFulfillmentName);
+            var passwordConnection = new PasswordConnectionInfo("34.253.149.210", "qa1_whc_storelogix", "YJay48TM8Vaqj6Sw");
+            SFTPHandlers.DownloadSFTPStorelogix(orderNumber, newFulfillmentName, passwordConnection);
 
-            var order_City = XMLOrderValueExtractor(xentralOrderXML, "rechnung_ort");
+            var order_City = XmlOrderSingleValueExtractor(xentralOrderXML, "rechnung_ort");
             var fulfillment_City = XMLFulfillmentsXpathValueExtractor(newFulfillmentName, "Invoicing/Address/City");
 
             Assert.AreEqual(order_City, fulfillment_City, "Mapped values are not the same!");
@@ -61,11 +78,11 @@ namespace Everstox.API.IntegrationTests.SFTP_Integration_Tests
            
         }
 
-        public string XMLOrderValueExtractor(string fileName, string nodeValue)
+        public string XmlOrderSingleValueExtractor(string fileName, string nodeValue)
         {
-            var sourceFile = @"..\..\..\Xentral_Orders\" + fileName + ".xml".Replace('\\', Path.PathSeparator);
+            var sourceFile = "..\\..\\..\\Xentral_Orders\\" + fileName + ".xml".Replace('\\', Path.PathSeparator);
             var data = XElement.Load(sourceFile);
-            return data.Descendants(nodeValue).FirstOrDefault().Value;
+            return data.Descendants(nodeValue).Single().Value;
         }
 
         public string XMLOrderXpathValueExtractor(string fileName, string nodeValue)

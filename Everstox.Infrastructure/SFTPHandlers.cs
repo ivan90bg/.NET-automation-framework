@@ -14,7 +14,7 @@ namespace Everstox.Infrastructure
             return new PasswordConnectionInfo(ip, username, password);
         }
 
-        private static ConnectionInfo GetStorelogixSftLogin()
+        private static ConnectionInfo GetStoreLogixSftpLogin()
         {
             var ip = "34.253.149.210";
             var username = "qa1_whc_storelogix";
@@ -40,9 +40,9 @@ namespace Everstox.Infrastructure
             }
         }
 
-        public static void DownloadSFTPStorelogix(string fileName, string fulfillmentName)
+        public static void DownloadSFTPStorelogix(string fileName, string fulfillmentName, PasswordConnectionInfo connectionInfo)
         {
-            using (SftpClient client = new SftpClient(GetStorelogixSftLogin()))
+            using (SftpClient client = new SftpClient(GetStoreLogixSftpLogin()))
             {
                 client.Connect();
 
@@ -59,7 +59,8 @@ namespace Everstox.Infrastructure
 
             }
         }
+
+        
     }
 
-     
 }
