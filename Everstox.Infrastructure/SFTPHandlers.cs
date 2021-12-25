@@ -42,25 +42,17 @@ namespace Everstox.Infrastructure
 
         public static void DownloadSFTPStorelogix(string fileName, string fulfillmentName, PasswordConnectionInfo connectionInfo)
         {
-            using (SftpClient client = new SftpClient(GetStoreLogixSftpLogin()))
-            {
-                client.Connect();
+            using var client = new SftpClient(GetStoreLogixSftpLogin());
+            client.Connect();
 
+            string serverFile = @"/import/" + fileName + ".xml";
+            string localFile = @"..\..\..\Storelogix_Fulfillments\" + fulfillmentName + ".xml";
 
-                string serverFile = @"/import/" + fileName + ".xml";
-                string localFile = @"..\..\..\Storelogix_Fulfillments\" + fulfillmentName + ".xml";
+            using (Stream stream = File.OpenWrite(localFile)) 
+                client.DownloadFile(serverFile, stream);
 
-                using (Stream stream = File.OpenWrite(localFile))
-                {
-                    client.DownloadFile(serverFile, stream);
-                }
-
-                client.Disconnect();
-
-            }
+            client.Disconnect();
         }
-
-        
     }
 
 }

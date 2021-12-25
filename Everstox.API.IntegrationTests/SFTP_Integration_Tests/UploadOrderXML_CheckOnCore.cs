@@ -22,41 +22,45 @@ namespace Everstox.API.IntegrationTests.SFTP_Integration_Tests
     {
         [DataTestMethod]
         [DataRow("TestOrder1", "TestFulfillment_1")]
-        public async Task UploadOrderXML_CheckOnCore_ShouldReturnCorrectStatusCode(string xentralOrderXML, string newFulfillmentName)
+        public async Task UploadOrderXML_CheckOnCore_ShouldReturnCorrectStatusCode(string xentralOrderXML,
+            string newFulfillmentName)
         {
-
             SFTPHandlers.UploadSFTPXentral(xentralOrderXML);
             var orderNumber = XmlOrderSingleValueExtractor(xentralOrderXML, "auftrag");
 
             var triggerResponse = await XentralSyncTrigger();
             ValidateTriggeredResponseOnXentral(triggerResponse);
 
-            PolicyResult<IRestResponse<OrderList_Response>>? orderResponse = await Policy
-                .Handle<Exception>()
-                .OrResult<IRestResponse<OrderList_Response>>(r => !r.IsSuccessful || r.Data.count < 1)
-                .WaitAndRetryAsync(
-                    3,
-                    retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
-                    (response, timeSpan, retryAttempt, context) =>
-                    {
-                        Debug.WriteLine(retryAttempt);
-                        Debug.WriteLine(timeSpan);
-                        Debug.WriteLine(response.Result.Content);
-                    })
-                .ExecuteAndCaptureAsync(async () => await GerOrderByNameFromXML(orderNumber));
-
+            var orderResponse = await GetOrRetryOrderResponse(orderNumber);
 
             ValidateXentralOrderIsOnCore(orderNumber, orderResponse.Result);
 
             await Task.Delay(9000);
 
-            var passwordConnection = new PasswordConnectionInfo("34.253.149.210", "qa1_whc_storelogix", "YJay48TM8Vaqj6Sw");
+            var passwordConnection =
+                new PasswordConnectionInfo("34.253.149.210", "qa1_whc_storelogix", "YJay48TM8Vaqj6Sw");
             SFTPHandlers.DownloadSFTPStorelogix(orderNumber, newFulfillmentName, passwordConnection);
+
 
             var order_City = XmlOrderSingleValueExtractor(xentralOrderXML, "rechnung_ort");
             var fulfillment_City = XMLFulfillmentsXpathValueExtractor(newFulfillmentName, "Invoicing/Address/City");
 
             Assert.AreEqual(order_City, fulfillment_City, "Mapped values are not the same!");
+        }
+
+        private async Task<PolicyResult<IRestResponse<OrderList_Response>>> GetOrRetryOrderResponse(string orderNumber)
+        {
+            PolicyResult<IRestResponse<OrderList_Response>>? orderResponse = await Policy.Handle<Exception>()
+                .OrResult<IRestResponse<OrderList_Response>>(r => !r.IsSuccessful || r.Data.count < 1)
+                .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
+                    (response, timeSpan, retryAttempt, context) =>
+                    {
+                        Debug.WriteLine(retryAttempt);
+                        Debug.WriteLine(timeSpan);
+                        Debug.WriteLine(response.Result.Content);
+                    }).ExecuteAndCaptureAsync(async () => await GerOrderByNameFromXML(orderNumber));
+
+            return orderResponse;
         }
 
 
@@ -75,7 +79,6 @@ namespace Everstox.API.IntegrationTests.SFTP_Integration_Tests
         {
             var orderService = new OrderService();
             return await orderService.GetOrderByNumber(Shops.QA1Shop_Id, orderNumber);
-           
         }
 
         public string XmlOrderSingleValueExtractor(string fileName, string nodeValue)
@@ -110,10 +113,8 @@ namespace Everstox.API.IntegrationTests.SFTP_Integration_Tests
         {
             var client = new RestClientHandler("https://sc-xentral.qa1.everstox.com/orders/sync");
             RestRequest request = new RequestBuilder()
-                .AddApiKeyAuthorization("api-token", "f36ab4c7-c64d-4f9e-aae3-ad834175b313")
-                .SetContentType()
-                .SetHttpMethod(Method.POST)
-                .Build();
+                .AddApiKeyAuthorization("api-token", "f36ab4c7-c64d-4f9e-aae3-ad834175b313").SetContentType()
+                .SetHttpMethod(Method.POST).Build();
 
             return await client.ExecuteAsync(request);
         }
