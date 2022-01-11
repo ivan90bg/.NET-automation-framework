@@ -142,8 +142,8 @@ namespace Everstox.API.IntegrationTests.OrderFlowIntegrationTests
             {
                 batch = new Batch_Req()
                 {
-                    batch = "firstBatch",
-                    expiration_date = new DateTime(2021, 12, 31)
+                    batch = "AutomationBatch",
+                    expiration_date = DateTime.Now.AddDays(31),
                 },
 
                 product = new Product_Stock()
@@ -218,14 +218,14 @@ namespace Everstox.API.IntegrationTests.OrderFlowIntegrationTests
 
                 carrier_id = Carriers.DHL_Id,
                 fulfillment_id = lastOrderResponse.Data.items[0].fulfillments[0].id,
-                shipment_date = DateTime.Now,
+                shipment_date = DateTime.Now.AddDays(7),
                 shipment_items = new List<ShipmentItem_S>() {
                     new ShipmentItem_S {
                         product = new ProductShipment() {
                             sku = lastOrderResponse.Data.items[0].order_items[0].product.sku },
                     quantity = lastOrderResponse.Data.items[0].order_items[0].quantity - 1 } },
-                tracking_codes = new List<string>() { "auto1", "auto2" },
-                tracking_urls = new List<string>() { "google.com/auto1", "google.com/auto2" }
+                tracking_codes = new List<string>() { "automation1", "automation2" },
+                tracking_urls = new List<string>() { "tracking.com/automation1", "tracking.com/automation2" }
             };
         }
 

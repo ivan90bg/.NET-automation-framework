@@ -13,39 +13,37 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using Polly;
-using Renci.SshNet;
+using System.Xml;
+using System.Text;
 
 namespace Everstox.API.IntegrationTests.SFTP_Integration_Tests
 {
     [TestClass]
-    public class UploadOrderXML_CheckOnCore
+    public class UploadOrderXML_CheckCore_CheckStorelogixFulfillment
     {
         [DataTestMethod]
         [DataRow("TestOrder1", "TestFulfillment_1")]
-        public async Task UploadOrderXML_CheckOnCore_ShouldReturnCorrectStatusCode(string xentralOrderXML,
-            string newFulfillmentName)
+        public async Task UploadOrderXML_CheckCore_CheckStorelogixFulfillment_ShouldReturnCorrectData(string xentralOrderXML, string newFulfillmentName)
         {
+           
+            XmlOrderNodeValueChange(xentralOrderXML, "auftrag", $"SFTPAuto{new Random().Next(1000)}");
+
             SFTPHandlers.UploadSFTPXentral(xentralOrderXML);
+
             var orderNumber = XmlOrderSingleValueExtractor(xentralOrderXML, "auftrag");
 
             var triggerResponse = await XentralSyncTrigger();
             ValidateTriggeredResponseOnXentral(triggerResponse);
 
-            var orderResponse = await GetOrRetryOrderResponse(orderNumber);
+            await GetOrRetryOrderResponse(orderNumber);
 
-            ValidateXentralOrderIsOnCore(orderNumber, orderResponse.Result);
-
-            await Task.Delay(9000);
-
-            var passwordConnection =
-                new PasswordConnectionInfo("34.253.149.210", "qa1_whc_storelogix", "YJay48TM8Vaqj6Sw");
-            SFTPHandlers.DownloadSFTPStorelogix(orderNumber, newFulfillmentName, passwordConnection);
-
+            SFTPHandlers.DownloadSFTPStorelogix(orderNumber, newFulfillmentName);
 
             var order_City = XmlOrderSingleValueExtractor(xentralOrderXML, "rechnung_ort");
-            var fulfillment_City = XMLFulfillmentsXpathValueExtractor(newFulfillmentName, "Invoicing/Address/City");
+            var fulfillment_City = XmlFulfillmentsXpathValueExtractor(newFulfillmentName, "Invoicing/Address/City");
 
             Assert.AreEqual(order_City, fulfillment_City, "Mapped values are not the same!");
+
         }
 
         private async Task<PolicyResult<IRestResponse<OrderList_Response>>> GetOrRetryOrderResponse(string orderNumber)
@@ -58,16 +56,9 @@ namespace Everstox.API.IntegrationTests.SFTP_Integration_Tests
                         Debug.WriteLine(retryAttempt);
                         Debug.WriteLine(timeSpan);
                         Debug.WriteLine(response.Result.Content);
-                    }).ExecuteAndCaptureAsync(async () => await GerOrderByNameFromXML(orderNumber));
+                    }).ExecuteAndCaptureAsync(async () => await GetOrderByNameFromXML(orderNumber));
 
             return orderResponse;
-        }
-
-
-        private void ValidateXentralOrderIsOnCore(string orderNumber, IRestResponse<OrderList_Response> orderResponse)
-        {
-            Assert.AreEqual(HttpStatusCode.OK, orderResponse.StatusCode, orderResponse.Content.ToString());
-            Assert.AreEqual(orderNumber, orderResponse.Data.items[0].order_number, orderResponse.Content.ToString());
         }
 
         private void ValidateTriggeredResponseOnXentral(IRestResponse triggerResponse)
@@ -75,48 +66,62 @@ namespace Everstox.API.IntegrationTests.SFTP_Integration_Tests
             Assert.AreEqual(HttpStatusCode.OK, triggerResponse.StatusCode, triggerResponse.Content.ToString());
         }
 
-        private async Task<IRestResponse<OrderList_Response>> GerOrderByNameFromXML(string orderNumber)
+        private async Task<IRestResponse<OrderList_Response>> GetOrderByNameFromXML(string orderNumber)
         {
             var orderService = new OrderService();
             return await orderService.GetOrderByNumber(Shops.QA1Shop_Id, orderNumber);
         }
 
-        public string XmlOrderSingleValueExtractor(string fileName, string nodeValue)
+        private string XmlOrderSingleValueExtractor(string fileName, string nodeValue)
         {
             var sourceFile = "..\\..\\..\\Xentral_Orders\\" + fileName + ".xml".Replace('\\', Path.PathSeparator);
             var data = XElement.Load(sourceFile);
             return data.Descendants(nodeValue).Single().Value;
         }
 
-        public string XMLOrderXpathValueExtractor(string fileName, string nodeValue)
+        private void XmlOrderNodeValueChange(string fileName, string nodeValue, string newValue)
         {
-            var sourceFile = @"..\..\..\Xentral_Orders\" + fileName + ".xml";
+            var sourceFile = "..\\..\\..\\Xentral_Orders\\" + fileName + ".xml".Replace('\\', Path.PathSeparator);
+            var data = XElement.Load(sourceFile);
+            var valueForUpdate = data.Descendants().Where(n => n.Name == nodeValue).ToList().Single().Value = newValue;
+            using (var writer = new StreamWriter(sourceFile, false, new UTF8Encoding(false)))
+            {
+                data.Save(writer);
+            }               
+            
+        }
+
+        private string XmlFulfillmentsXpathValueExtractor(string fileName, string nodeValue)
+        {
+            var sourceFile = @"..\\..\\..\\Storelogix_Fulfillments\\" + fileName + ".xml".Replace('\\', Path.PathSeparator); ;
             var data = XElement.Load(sourceFile);
             return data.XPathSelectElement($"//*/{nodeValue}").Value;
         }
 
-        public string XMLFulfillmentValueExtractor(string fileName, string nodeValue)
-        {
-            var sourceFile = @"..\..\..\Storelogix_Fulfillments\" + fileName + ".xml";
-            var data = XElement.Load(sourceFile);
-            return data.Descendants(nodeValue).FirstOrDefault().Value;
-        }
-
-        public string XMLFulfillmentsXpathValueExtractor(string fileName, string nodeValue)
-        {
-            var sourceFile = @"..\..\..\Storelogix_Fulfillments\" + fileName + ".xml";
-            var data = XElement.Load(sourceFile);
-            return data.XPathSelectElement($"//*/{nodeValue}").Value;
-        }
-
-        public async Task<IRestResponse> XentralSyncTrigger()
+        private async Task<IRestResponse> XentralSyncTrigger()
         {
             var client = new RestClientHandler("https://sc-xentral.qa1.everstox.com/orders/sync");
             RestRequest request = new RequestBuilder()
-                .AddApiKeyAuthorization("api-token", "f36ab4c7-c64d-4f9e-aae3-ad834175b313").SetContentType()
-                .SetHttpMethod(Method.POST).Build();
+                .AddApiKeyAuthorization("api-token", Shops.Xentral_Id)
+                .SetContentType()
+                .SetHttpMethod(Method.POST)
+                .Build();
 
             return await client.ExecuteAsync(request);
+        }
+
+        private string XmlOrderXpathValueExtractor(string fileName, string nodeValue)
+        {
+            var sourceFile = @"..\\..\\..\\Xentral_Orders\\" + fileName + ".xml".Replace('\\', Path.PathSeparator);
+            var data = XElement.Load(sourceFile);
+            return data.XPathSelectElement($"//*/{nodeValue}").Value;
+        }
+
+        private string XmlFulfillmentValueExtractor(string fileName, string nodeValue)
+        {
+            var sourceFile = @"..\\..\\..\\Storelogix_Fulfillments\\" + fileName + ".xml".Replace('\\', Path.PathSeparator); ;
+            var data = XElement.Load(sourceFile);
+            return data.Descendants(nodeValue).Single().Value;
         }
     }
 }

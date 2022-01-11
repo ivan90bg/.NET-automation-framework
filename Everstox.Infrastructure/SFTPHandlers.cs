@@ -1,4 +1,6 @@
-﻿using Renci.SshNet;
+﻿using Polly;
+using Renci.SshNet;
+using System.Diagnostics;
 
 namespace Everstox.Infrastructure
 {
@@ -21,38 +23,46 @@ namespace Everstox.Infrastructure
             var password = "YJay48TM8Vaqj6Sw";
 
             return new PasswordConnectionInfo(ip, username, password);
-        }
+        }      
 
         public static void UploadSFTPXentral(string fileName)
         {
-            using (SftpClient client = new SftpClient(GetXentralSftpLogin()))
-            {
-                client.Connect();
+            using var client = new SftpClient(GetXentralSftpLogin());           
+            client.Connect();
 
-                string sourceFile = @"..\..\..\Xentral_Orders\" + fileName + ".xml";
-                using (Stream stream = File.OpenRead(sourceFile))
-                {
-                    client.UploadFile(stream, @"/export/" + Path.GetFileName(sourceFile));
-                }
+             string sourceFile = @"..\\..\\..\\Xentral_Orders\\" + fileName + ".xml".Replace('\\', Path.PathSeparator);
 
-                client.Disconnect();
-
-            }
+             using (Stream stream = File.OpenRead(sourceFile))
+                 client.UploadFile(stream, @"/export/" + Path.GetFileName(sourceFile));
+             
+             client.Disconnect();
+            
         }
 
-        public static void DownloadSFTPStorelogix(string fileName, string fulfillmentName, PasswordConnectionInfo connectionInfo)
+        public static void DownloadSFTPStorelogix(string fileName, string fulfillmentName)
         {
+            var retryPolicy = Policy.Handle<Exception>().WaitAndRetry(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
+                 (timeSpan, retryAttempt) =>
+                 {
+                     Debug.WriteLine($"{retryAttempt} File not found..." );
+                    // Debug.WriteLine(timeSpan);
+                 });
+
             using var client = new SftpClient(GetStoreLogixSftpLogin());
             client.Connect();
 
-            string serverFile = @"/import/" + fileName + ".xml";
-            string localFile = @"..\..\..\Storelogix_Fulfillments\" + fulfillmentName + ".xml";
+            retryPolicy.Execute(() =>
+            {               
+                string serverFile = @"/import/" + fileName + ".xml";
+                string localFile = @"..\\..\\..\\Storelogix_Fulfillments\\" + fulfillmentName + ".xml".Replace('\\', Path.PathSeparator);
 
-            using (Stream stream = File.OpenWrite(localFile)) 
-                client.DownloadFile(serverFile, stream);
+                using (Stream stream = File.OpenWrite(localFile))
+                    client.DownloadFile(serverFile, stream);
+                
+            });
 
             client.Disconnect();
-        }
+        }        
     }
 
 }

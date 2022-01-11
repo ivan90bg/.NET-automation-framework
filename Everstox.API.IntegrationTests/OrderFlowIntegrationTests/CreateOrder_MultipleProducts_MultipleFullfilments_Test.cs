@@ -120,15 +120,14 @@ namespace Everstox.API.IntegrationTests.OrderFlowIntegrationTests
             {
                 carrier_id = Carriers.DHL_Id,
                 order_number = orderResponse.Data.order_number,
-                shipment_date = new DateTime(2021, 11, 29),
+                shipment_date = DateTime.Now.AddDays(7),
                 shipment_items = new List<ShipmentItem_S>() {
                     new ShipmentItem_S {
                         product = new ProductShipment() {
                             sku = orderResponse.Data.order_items[0].product.sku },
                     quantity = orderResponse.Data.order_items[0].quantity } },
-                tracking_code = "automationtrackingcode",
-                tracking_codes = new List<string>() { "auto1", "auto2" },
-                tracking_urls = new List<string>() { "automation tracking url" }
+                tracking_codes = new List<string>() { "automation1", "automation2" },
+                tracking_urls = new List<string>() { "tracking.com/automation1", "tracking.com/automation2" }
             };
         }
 
@@ -138,15 +137,14 @@ namespace Everstox.API.IntegrationTests.OrderFlowIntegrationTests
             {
                 carrier_id = Carriers.UPS_Id,
                 order_number = orderResponse.Data.order_number,
-                shipment_date = new DateTime(2021, 11, 29),
+                shipment_date = DateTime.Now.AddDays(7),
                 shipment_items = new List<ShipmentItem_S>() {
                     new ShipmentItem_S {
                         product = new ProductShipment() {
                             sku = orderResponse.Data.order_items[1].product.sku },
                     quantity = orderResponse.Data.order_items[1].quantity } },
-                tracking_code = "automationtrackingcode",
-                tracking_codes = new List<string>() { "auto1", "auto2" },
-                tracking_urls = new List<string>() { "automation tracking url" }
+                tracking_codes = new List<string>() { "automation1", "automation2" },
+                tracking_urls = new List<string>() { "tracking.com/automation1", "tracking.com/automation2" }
             };
         }
 

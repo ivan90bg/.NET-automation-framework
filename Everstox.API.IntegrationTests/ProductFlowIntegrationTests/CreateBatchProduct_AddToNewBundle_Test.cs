@@ -85,7 +85,7 @@ namespace Everstox.API.IntegrationTests.ProductFlowIntegrationTests
         {
             return new Stock_Request()
             {
-                batch = new Batch_Req() { batch = "batch_2628", expiration_date = new DateTime(2023, 01, 01) },
+                batch = new Batch_Req() { batch = "batch_2628", expiration_date = DateTime.Now.AddDays(30) },
                 product = new Product_Stock() { shop_id = Shops.TestShop_Id, sku = firstBatchProductRequest.sku },
                 quantity = 500
             };
@@ -95,7 +95,7 @@ namespace Everstox.API.IntegrationTests.ProductFlowIntegrationTests
         {
             return new Stock_Request()
             {
-                batch = new Batch_Req() { batch = "batch_N68", expiration_date = new DateTime(2023, 01, 01) },
+                batch = new Batch_Req() { batch = "batch_N68", expiration_date = DateTime.Now.AddDays(60) },
                 product = new Product_Stock() { shop_id = Shops.TestShop_Id, sku = secondBatchProductRequest.sku },
                 quantity = 500
             };

@@ -66,7 +66,6 @@ namespace Everstox.API.IntegrationTests.OrderFlowIntegrationTests
         {
             Assert.AreEqual(HttpStatusCode.Created, orderResponse.StatusCode, orderResponse.Content.ToString());
             Assert.AreEqual(orderRequest.order_priority, orderResponse.Data.order_priority);
-            Assert.AreEqual(orderRequest.order_number, orderResponse.Data.order_number);
             Assert.AreEqual(EnumString.GetStringValue(Fulfillment_State.In_Fullfilment), orderResponse.Data.state);
             Assert.AreEqual(EnumString.GetStringValue(Warehouse_Names.Finecom), orderResponse.Data.fulfillments[0].warehouse.name);
             Assert.AreEqual("automationbatch", orderResponse.Data.order_items[0].custom_attributes[0].attribute_value);
@@ -96,7 +95,7 @@ namespace Everstox.API.IntegrationTests.OrderFlowIntegrationTests
             {
                 carrier_id = Carriers.DHL_Id,
                 order_number = orderResponse.Data.order_number,
-                shipment_date = DateTime.Now,
+                shipment_date = DateTime.Now.AddDays(7),
                 shipment_items = new List<ShipmentItem_S>() {
                     new ShipmentItem_S {
                         product = new ProductShipment() {
@@ -107,8 +106,8 @@ namespace Everstox.API.IntegrationTests.OrderFlowIntegrationTests
                         quantity = orderResponse.Data.order_items[0].quantity,
                         sku = orderResponse.Data.order_items[0].product.sku } }
                     } },
-                tracking_codes = new List<string>() { "auto1", "auto2" },
-                tracking_urls = new List<string>() { "tracking.com/auto1", "tracking.com/auto2" }
+                tracking_codes = new List<string>() { "automation1", "automation2" },
+                tracking_urls = new List<string>() { "tracking.com/automation1", "tracking.com/automation2" }
             };
         }
 
