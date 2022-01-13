@@ -30,9 +30,11 @@ namespace Everstox.Infrastructure
             using var client = new SftpClient(GetXentralSftpLogin());           
             client.Connect();
 
-             string sourceFile = @"..\\..\\..\\Xentral_Orders\\" + fileName + ".xml".Replace('\\', Path.PathSeparator);
+            string path = @"..\\..\\..\\Xentral_Orders\\" + fileName + ".xml";
 
-             using (Stream stream = File.OpenRead(sourceFile))
+            string sourceFile = path.Replace('\\', Path.PathSeparator);
+
+            using (Stream stream = File.OpenRead(sourceFile))
                  client.UploadFile(stream, @"/export/" + Path.GetFileName(sourceFile));
              
              client.Disconnect();
@@ -54,7 +56,9 @@ namespace Everstox.Infrastructure
             retryPolicy.Execute(() =>
             {               
                 string serverFile = @"/import/" + fileName + ".xml";
-                string localFile = @"..\\..\\..\\Storelogix_Fulfillments\\" + fulfillmentName + ".xml".Replace('\\', Path.PathSeparator);
+                string path = @"..\\..\\..\\Storelogix_Fulfillments\\" + fulfillmentName + ".xml";
+
+                string localFile = path.Replace('\\', Path.PathSeparator);
 
                 using (Stream stream = File.OpenWrite(localFile))
                     client.DownloadFile(serverFile, stream);

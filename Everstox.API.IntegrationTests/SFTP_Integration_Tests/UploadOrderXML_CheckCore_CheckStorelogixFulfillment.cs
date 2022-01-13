@@ -74,14 +74,16 @@ namespace Everstox.API.IntegrationTests.SFTP_Integration_Tests
 
         private string XmlOrderSingleValueExtractor(string fileName, string nodeValue)
         {
-            var sourceFile = "..\\..\\..\\Xentral_Orders\\" + fileName + ".xml".Replace('\\', Path.PathSeparator);
+            var path = "..\\..\\..\\Xentral_Orders\\" + fileName + ".xml";
+            var sourceFile = path.Replace('\\', Path.PathSeparator);
             var data = XElement.Load(sourceFile);
             return data.Descendants(nodeValue).Single().Value;
         }
 
         private void XmlOrderNodeValueChange(string fileName, string nodeValue, string newValue)
         {
-            var sourceFile = "..\\..\\..\\Xentral_Orders\\" + fileName + ".xml".Replace('\\', Path.PathSeparator);
+            var path = "..\\..\\..\\Xentral_Orders\\" + fileName + ".xml";
+            var sourceFile = path.Replace('\\', Path.PathSeparator);
             var data = XElement.Load(sourceFile);
             var valueForUpdate = data.Descendants().Where(n => n.Name == nodeValue).ToList().Single().Value = newValue;
             using (var writer = new StreamWriter(sourceFile, false, new UTF8Encoding(false)))
@@ -93,7 +95,8 @@ namespace Everstox.API.IntegrationTests.SFTP_Integration_Tests
 
         private string XmlFulfillmentsXpathValueExtractor(string fileName, string nodeValue)
         {
-            var sourceFile = @"..\\..\\..\\Storelogix_Fulfillments\\" + fileName + ".xml".Replace('\\', Path.PathSeparator); ;
+            var path = @"..\\..\\..\\Storelogix_Fulfillments\\" + fileName + ".xml";
+            var sourceFile = path.Replace('\\', Path.PathSeparator);
             var data = XElement.Load(sourceFile);
             return data.XPathSelectElement($"//*/{nodeValue}").Value;
         }
@@ -112,14 +115,16 @@ namespace Everstox.API.IntegrationTests.SFTP_Integration_Tests
 
         private string XmlOrderXpathValueExtractor(string fileName, string nodeValue)
         {
-            var sourceFile = @"..\\..\\..\\Xentral_Orders\\" + fileName + ".xml".Replace('\\', Path.PathSeparator);
+            var path = @"..\\..\\..\\Xentral_Orders\\" + fileName + ".xml";
+            var sourceFile = path.Replace('\\', Path.PathSeparator);
             var data = XElement.Load(sourceFile);
             return data.XPathSelectElement($"//*/{nodeValue}").Value;
         }
 
         private string XmlFulfillmentValueExtractor(string fileName, string nodeValue)
         {
-            var sourceFile = @"..\\..\\..\\Storelogix_Fulfillments\\" + fileName + ".xml".Replace('\\', Path.PathSeparator); ;
+            var path = @"..\\..\\..\\Storelogix_Fulfillments\\" + fileName + ".xml";
+            var sourceFile = path.Replace('\\', Path.PathSeparator);
             var data = XElement.Load(sourceFile);
             return data.Descendants(nodeValue).Single().Value;
         }
