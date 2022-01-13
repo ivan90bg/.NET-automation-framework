@@ -22,7 +22,7 @@ namespace Everstox.API.IntegrationTests.Static_Data {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Shops {
+    public class Shops {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -63,7 +63,7 @@ namespace Everstox.API.IntegrationTests.Static_Data {
         /// <summary>
         ///   Looks up a localized string similar to 8898caa8-7264-4952-b72b-d6e52b5378ab.
         /// </summary>
-        internal static string QA1Shop_Id {
+        public static string QA1Shop_Id {
             get {
                 return ResourceManager.GetString("QA1Shop_Id", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace Everstox.API.IntegrationTests.Static_Data {
         /// <summary>
         ///   Looks up a localized string similar to 4fa5a0aa-8f20-47b7-b95f-4af40d8797ec.
         /// </summary>
-        internal static string TestShop_Id {
+        public static string TestShop_Id {
             get {
                 return ResourceManager.GetString("TestShop_Id", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace Everstox.API.IntegrationTests.Static_Data {
         /// <summary>
         ///   Looks up a localized string similar to f36ab4c7-c64d-4f9e-aae3-ad834175b313.
         /// </summary>
-        internal static string Xentral_Id {
+        public static string Xentral_Id {
             get {
                 return ResourceManager.GetString("Xentral_Id", resourceCulture);
             }

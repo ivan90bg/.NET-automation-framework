@@ -32,7 +32,7 @@ namespace Everstox.Infrastructure
 
             string path = @"..\\..\\..\\Xentral_Orders\\" + fileName + ".xml";
 
-            string sourceFile = path.Replace('\\', Path.PathSeparator);
+            string sourceFile = path.Replace('\\', Path.DirectorySeparatorChar);
 
             using (Stream stream = File.OpenRead(sourceFile))
                  client.UploadFile(stream, @"/export/" + Path.GetFileName(sourceFile));
@@ -58,7 +58,7 @@ namespace Everstox.Infrastructure
                 string serverFile = @"/import/" + fileName + ".xml";
                 string path = @"..\\..\\..\\Storelogix_Fulfillments\\" + fulfillmentName + ".xml";
 
-                string localFile = path.Replace('\\', Path.PathSeparator);
+                string localFile = path.Replace('\\', Path.DirectorySeparatorChar);
 
                 using (Stream stream = File.OpenWrite(localFile))
                     client.DownloadFile(serverFile, stream);
