@@ -22,7 +22,7 @@ namespace Everstox.API.IntegrationTests.OrderFlowIntegrationTests
     [TestClass]
     public class CreateOrder_SingleProduct_Flow_Test
     {
-        [DeploymentItem(".\\Test_Data\\")]
+        [DeploymentItem(@".\Test_Data\")]
         [TestMethod]
         public async Task CreateOrder_SingleOrderItem_Flow_ShouldReturnCorrectStatusCode()
         {

@@ -30,7 +30,7 @@ namespace Everstox.API.IntegrationTests.OrderFlowIntegrationTests
     [TestClass]
     public class CreateOrder_InvalidProduct_Cancellation_Test
     {
-        [DeploymentItem(".\\Test_Data\\")]
+        [DeploymentItem(@".\Test_Data\")]
         [TestMethod]
         public async Task CreateOrder_InvalidBatch_CreateBatch_PartialShipment_Cancellation_Test()
         {
