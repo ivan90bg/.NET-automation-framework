@@ -10,7 +10,8 @@ namespace Everstox.API.Shop.Orders.Models.Request_Models
         public List<CustomAttribute> custom_attributes { get; set; }
         public string customer_email { get; set; }
         public string financial_status { get; set; }
-        public DateTime order_date { get; set; }
+
+        public DateTime order_date = DateTime.UtcNow;
         public List<OrderItem> order_items { get; set; }
         public string order_number { get; set; }
         public int order_priority { get; set; }

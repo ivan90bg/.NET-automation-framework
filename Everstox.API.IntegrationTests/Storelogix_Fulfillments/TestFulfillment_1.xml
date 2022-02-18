@@ -37,8 +37,9 @@
         <StreetAddition></StreetAddition>
       </Address>
     </Invoicing>
-    <OrderDate>2022-01-13</OrderDate>
+    <OrderDate>2022-02-03</OrderDate>
     <Warehouse>Essen</Warehouse>
-    <OrderNumber>SFTPAuto351</OrderNumber>
+    <Documentes/>
+    <OrderNumber>SFTPAuto424</OrderNumber>
   </DeliveryOrder>
 </DeliveryOrders>

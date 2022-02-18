@@ -1,0 +1,95 @@
+﻿{
+  "billing_address": {
+    "address_1": "Via del corso",
+    "address_2": "",
+    "city": "Napoli",
+    "company": "Fake",
+    "contact_person": null,
+    "country": "United States",
+    "country_code": "US",
+    "department": null,
+    "first_name": "Fake name",
+    "last_name": "testlastname",
+    "latitude": 0,
+    "longitude": 0,
+    "phone": "",
+    "province": null,
+    "province_code": null,
+    "sub_department": null,
+    "title": "",
+    "zip": "10132",
+    "VAT_number": null
+  },
+  "custom_attributes": [
+    {
+      "attribute_key": "Type",
+      "attribute_value": ""
+    }
+  ],
+  "customer_email": "whassignment@email.com",
+  "financial_status": "paid",
+  "order_date": "2021-11-16T11:00:55+01:00",
+  "order_items": [
+    {
+      "custom_attributes": [
+        {
+          "attribute_key": "OI Atttribute key",
+          "attribute_value": "OI attribute value"
+        }
+      ],
+      "price_set": [
+        {
+          "currency": "EUR",
+          "discount": "0",
+          "price": "0",
+          "quantity": 1,
+          "tax": "0",
+          "tax_rate": "0"
+        }
+      ],
+      "product": {
+        "sku": "FSoda"
+      },
+      "quantity": 1,
+      "shipment_options": [
+        {
+          "name": "Standard"
+        }
+      ]
+    }
+  ],
+  "order_number": "",
+  "order_priority": 50,
+  "payment_method_id": "dcf7b92e-83e9-415c-8174-4a6005d2927b",
+  "payment_method_name": null,
+  "requested_delivery_date": "0001-01-01T00:00:00+00:00",
+  "requested_warehouse_id": null,
+  "requested_warehouse_name": null,
+  "shipping_address": {
+    "address_1": "14 Aspen Drive, North Caldwell",
+    "address_2": "",
+    "city": "Napoli",
+    "company": "",
+    "contact_person": null,
+    "country": "United States",
+    "country_code": "US",
+    "department": null,
+    "first_name": "Anthony",
+    "last_name": "Soprano",
+    "latitude": 0,
+    "longitude": 0,
+    "phone": "",
+    "province": null,
+    "province_code": null,
+    "sub_department": null,
+    "title": null,
+    "zip": "01132"
+  },
+  "shipping_price": {
+    "currency": "EUR",
+    "discount": "0",
+    "price": "0",
+    "tax": "0"
+  },
+  "shop_instance_id": "ef9b2039-79c1-4712-9b88-94ba2a272436"
+}

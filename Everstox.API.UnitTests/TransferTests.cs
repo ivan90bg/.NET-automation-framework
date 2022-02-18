@@ -28,9 +28,9 @@ namespace Everstox.API.UnitTests
                                                             new TransferItem_T_Req() { sku = "beer", quantity_announced = 10 }},
                 transfer_number = $"Transfer - {Guid.NewGuid()}"
             };
-            
+
             var transferService = new TransfersService();
-            var response =  await transferService.CreateTransfer(Shops.TestShop_Id, transfer);
+            var response = await transferService.CreateTransfer(Shops.TestShop_Id, transfer);
 
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
             Assert.Equal(transfer.source, response.Data.source);

@@ -13,7 +13,6 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using Polly;
-using System.Xml;
 using System.Text;
 
 namespace Everstox.API.IntegrationTests.SFTP_Integration_Tests

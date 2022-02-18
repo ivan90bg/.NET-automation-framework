@@ -135,6 +135,12 @@
   <data name="FinecomQA1_Id" xml:space="preserve">
     <value>091eb34d-c2c8-4520-b6ea-cc2ab90cb0e5</value>
   </data>
+  <data name="German_WH_Connector" xml:space="preserve">
+    <value>e73ff472-c0ef-4010-9ae6-c0a55ef728c2</value>
+  </data>
+  <data name="German_WH_Id" xml:space="preserve">
+    <value>2b595047-400f-4a7f-b303-2475c9855d81</value>
+  </data>
   <data name="IvanWarehouse_Connector" xml:space="preserve">
     <value>c7e03b5f-c210-4967-b3cc-d3e95d1e5f91</value>
   </data>
@@ -146,5 +152,17 @@
   </data>
   <data name="StorelogixQA1_Id" xml:space="preserve">
     <value>168fd242-fe2e-450f-b436-6cacbd84a176</value>
+  </data>
+  <data name="USA_WH1_Connector" xml:space="preserve">
+    <value>47948d44-78e8-4101-9f81-dfa167055f85</value>
+  </data>
+  <data name="USA_WH1_Id" xml:space="preserve">
+    <value>9dcf3cc1-fb2e-412f-ad91-1d651252d715</value>
+  </data>
+  <data name="USA_WH2_Connector" xml:space="preserve">
+    <value>3c379bce-378c-45ae-920e-6f99099ac184</value>
+  </data>
+  <data name="USA_WH2_Id" xml:space="preserve">
+    <value>a5c554ac-1fd2-4061-8f50-8268a6437921</value>
   </data>
 </root>

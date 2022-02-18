@@ -29,7 +29,7 @@ namespace Everstox.API.IntegrationTests.Static_Data {
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Shops() {
+        public Shops() {
         }
         
         /// <summary>
@@ -61,6 +61,15 @@ namespace Everstox.API.IntegrationTests.Static_Data {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 933534b8-76c8-4fe1-8cec-700faac8098e.
+        /// </summary>
+        public static string IV_Shop_Id {
+            get {
+                return ResourceManager.GetString("IV_Shop_Id", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to 8898caa8-7264-4952-b72b-d6e52b5378ab.
         /// </summary>
         public static string QA1Shop_Id {
@@ -68,7 +77,7 @@ namespace Everstox.API.IntegrationTests.Static_Data {
                 return ResourceManager.GetString("QA1Shop_Id", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to 4fa5a0aa-8f20-47b7-b95f-4af40d8797ec.
         /// </summary>
@@ -77,7 +86,7 @@ namespace Everstox.API.IntegrationTests.Static_Data {
                 return ResourceManager.GetString("TestShop_Id", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to f36ab4c7-c64d-4f9e-aae3-ad834175b313.
         /// </summary>

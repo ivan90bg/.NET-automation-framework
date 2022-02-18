@@ -13,7 +13,7 @@ namespace Everstox.API.Shop.Products
 
         public ProductsService(string token = "")
         {
-            _token = string.IsNullOrEmpty(token) ? "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NDI1MjQ2NjUsImlhdCI6MTYzOTkzMjY2NSwic3ViIjoiNmU1ODkzMDQtMDA0ZC00ODVlLTk0NjQtZWJkNWUwMTY4OTFkIn0.N5I268aP4X7Qe7c7LRjXD1FHkH5h___L99xQSG09nEM" : token;
+            _token = string.IsNullOrEmpty(token) ? "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NDYyMTY1NzgsImlhdCI6MTY0MzYyNDU3OCwic3ViIjoiNmU1ODkzMDQtMDA0ZC00ODVlLTk0NjQtZWJkNWUwMTY4OTFkIn0.2LZ7t9PFD-YORzama9m3H4l5AHktIfHEbw5QtW4EFC0" : token;
         }
 
         public async Task<IRestResponse<ProductList_Response>> GetAllProducts(string shopId)

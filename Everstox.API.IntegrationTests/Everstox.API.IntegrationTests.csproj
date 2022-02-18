@@ -79,6 +79,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Test_Data\OrderForWHAssignmentStrategy.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Test_Data\OrderWithInvalidBatchProduct.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

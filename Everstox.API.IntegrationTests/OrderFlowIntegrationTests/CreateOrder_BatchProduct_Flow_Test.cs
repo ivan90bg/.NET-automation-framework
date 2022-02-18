@@ -50,8 +50,7 @@ namespace Everstox.API.IntegrationTests.OrderFlowIntegrationTests
         private Order_Request GenerateOrderRequestFromJson(string fileName)
         {
             var orderRequest = RequestDeserializer.Deserialize<Order_Request>(fileName);
-            orderRequest.order_number = $"Order{Guid.NewGuid().ToString().Replace("-", "").Substring(0, 8)}";
-            orderRequest.order_date = DateTime.Now;
+            orderRequest.order_number = $"Order_{Guid.NewGuid().ToString().Replace("-", "").Substring(0, 8)}";
             return orderRequest;
         }
 
