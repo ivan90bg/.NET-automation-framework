@@ -9,7 +9,7 @@ namespace Everstox.Infrastructure
       
         private static ConnectionInfo GetXentralSftpLogin()
         {
-            var ip = "34.253.149.210";
+            var ip = "sftp.qa.everstox.com";
             var username = "qa1_sc_xentral";
             var password = "xB26aNqp7euUEErG";
 
@@ -18,7 +18,7 @@ namespace Everstox.Infrastructure
 
         private static ConnectionInfo GetStoreLogixSftpLogin()
         {
-            var ip = "34.253.149.210";
+            var ip = "sftp.qa.everstox.com";
             var username = "qa1_whc_storelogix";
             var password = "YJay48TM8Vaqj6Sw";
 

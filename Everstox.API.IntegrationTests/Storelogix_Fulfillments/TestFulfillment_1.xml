@@ -5,6 +5,7 @@
       <Item>
         <ItemNo>armaniXS</ItemNo>
         <Quantity>1</Quantity>
+        <IsTextPosition>0</IsTextPosition>
         <ValueAddedServices/>
       </Item>
     </Items>
@@ -16,7 +17,6 @@
         <City>Napoli</City>
         <Email></Email>
         <Name1>Some name</Name1>
-        <Name2></Name2>
         <Phone></Phone>
         <Street>Via del corso 445</Street>
         <PostCode>10132</PostCode>
@@ -24,6 +24,7 @@
         <StreetAddition></StreetAddition>
       </Address>
       <Service>Free shipping</Service>
+      <ServiceOptions>COD</ServiceOptions>
     </Shipping>
     <Invoicing>
       <Address>
@@ -36,10 +37,11 @@
         <CountryCode>IT</CountryCode>
         <StreetAddition></StreetAddition>
       </Address>
+      <InvoiceShippingNet>0.0</InvoiceShippingNet>
     </Invoicing>
-    <OrderDate>2022-02-03</OrderDate>
+    <OrderDate>2022-05-30</OrderDate>
     <Warehouse>Essen</Warehouse>
     <Documentes/>
-    <OrderNumber>SFTPAuto424</OrderNumber>
+    <OrderNumber>SFTPAuto407</OrderNumber>
   </DeliveryOrder>
 </DeliveryOrders>

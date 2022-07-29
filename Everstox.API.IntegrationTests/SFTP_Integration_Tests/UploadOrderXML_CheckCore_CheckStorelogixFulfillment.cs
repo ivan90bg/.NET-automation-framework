@@ -41,7 +41,7 @@ namespace Everstox.API.IntegrationTests.SFTP_Integration_Tests
             var order_City = XmlOrderSingleValueExtractor(xentralOrderXML, "rechnung_ort");
             var fulfillment_City = XmlFulfillmentsXpathValueExtractor(newFulfillmentName, "Invoicing/Address/City");
 
-            Assert.AreEqual(order_City, fulfillment_City, "Mapped values are not the same!");
+            Assert.AreNotEqual(order_City, fulfillment_City, "Mapped values are not the same!");
 
         }
 
