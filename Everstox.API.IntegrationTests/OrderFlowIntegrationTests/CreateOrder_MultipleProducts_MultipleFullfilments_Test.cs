@@ -1,4 +1,5 @@
-﻿using Everstox.API.IntegrationTests.Static_Data;
+﻿using AutoFixture;
+using Everstox.API.IntegrationTests.Static_Data;
 using Everstox.API.Shop.Orders;
 using Everstox.API.Shop.Orders.Models.Request_Models;
 using Everstox.API.Shop.Orders.Models.Response_Models;
@@ -26,6 +27,7 @@ namespace Everstox.API.IntegrationTests.OrderFlowIntegrationTests
         [TestMethod]
         public async Task CreateOrder_WithProvidedFileWithMultipleFulfillments_ShouldReturnCorrectStatusCode()
         {
+
             var orderRequest = GenerateOrderRequestFromJson("OrderWithMultipleFulfillments.json");
             var orderResponse = await CreateOrder(orderRequest);
 
@@ -65,6 +67,9 @@ namespace Everstox.API.IntegrationTests.OrderFlowIntegrationTests
             var orderRequest = RequestDeserializer.Deserialize<Order_Request>(fileName);
             orderRequest.order_number = $"Order{Guid.NewGuid().ToString().Replace("-", "").Substring(0, 6)}";
             orderRequest.order_date = DateTime.Now;
+            //orderRequest.order_items[2].product.sku = "ap2-mms";
+            //orderRequest.order_items[2].quantity = 2;
+            //orderRequest.order_items[2].price_set[0].quantity = 2;
             return orderRequest;
         }
 
@@ -78,8 +83,8 @@ namespace Everstox.API.IntegrationTests.OrderFlowIntegrationTests
         {
             Assert.AreEqual(HttpStatusCode.Created, orderResponse.StatusCode, orderResponse.Content.ToString());
             Assert.AreEqual(EnumString.GetStringValue(Fulfillment_State.In_Fullfilment), orderResponse.Data.state);
-            Assert.AreEqual(EnumString.GetStringValue(Warehouse_Names.Bolec_Warehouse), orderResponse.Data.fulfillments[0].warehouse.name);
-            Assert.AreEqual(EnumString.GetStringValue(Warehouse_Names.Finecom), orderResponse.Data.fulfillments[1].warehouse.name);
+            Assert.AreEqual(EnumString.GetStringValue(Warehouse_Names.Finecom), orderResponse.Data.fulfillments[0].warehouse.name);
+            Assert.AreEqual(EnumString.GetStringValue(Warehouse_Names.Bolec_Warehouse), orderResponse.Data.fulfillments[1].warehouse.name);
             Assert.AreEqual("shipping_note", orderResponse.Data.custom_attributes[0].attribute_key);
             Assert.AreEqual(EnumString.GetStringValue(Fulfillment_State.Warehouse_confirmation_pending), orderResponse.Data.fulfillments[0].state);
             Assert.AreEqual(EnumString.GetStringValue(Fulfillment_State.Warehouse_confirmation_pending), orderResponse.Data.fulfillments[1].state);
@@ -99,13 +104,13 @@ namespace Everstox.API.IntegrationTests.OrderFlowIntegrationTests
         private async Task<IRestResponse<Fulfillment_Response>> AcceptFirstFulfillment(List<Fulfillment_Request> fulfillment)
         {
             var fulfillmentService = new FulfillmentsService();
-            return await fulfillmentService.FulfillmentsAction(WarehousesData.BolecWarehouse_Id, WarehousesData.BolecWarehouse_Connector, fulfillment);
+            return await fulfillmentService.FulfillmentsAction(WarehousesData.FinecomQA1_Id, WarehousesData.FinecomQA1_Connector, fulfillment);
         }
 
         private async Task<IRestResponse<Fulfillment_Response>> AcceptSecondFulfillment(List<Fulfillment_Request> fulfillment)
         {
             var fulfillmentService = new FulfillmentsService();
-            return await fulfillmentService.FulfillmentsAction(WarehousesData.FinecomQA1_Id, WarehousesData.FinecomQA1_Connector, fulfillment);
+            return await fulfillmentService.FulfillmentsAction(WarehousesData.BolecWarehouse_Id, WarehousesData.BolecWarehouse_Connector, fulfillment);
         }
 
         private void ValidateFulfillment(IRestResponse<Fulfillment_Response> fulfillment_Response)
@@ -124,8 +129,8 @@ namespace Everstox.API.IntegrationTests.OrderFlowIntegrationTests
                 shipment_items = new List<ShipmentItem_S>() {
                     new ShipmentItem_S {
                         product = new ProductShipment() {
-                            sku = orderResponse.Data.order_items[0].product.sku },
-                    quantity = orderResponse.Data.order_items[0].quantity } },
+                            sku = orderResponse.Data.order_items[1].product.sku },
+                    quantity = orderResponse.Data.order_items[1].quantity } },
                 tracking_codes = new List<string>() { "automation1", "automation2" },
                 tracking_urls = new List<string>() { "tracking.com/automation1", "tracking.com/automation2" }
             };
@@ -141,8 +146,8 @@ namespace Everstox.API.IntegrationTests.OrderFlowIntegrationTests
                 shipment_items = new List<ShipmentItem_S>() {
                     new ShipmentItem_S {
                         product = new ProductShipment() {
-                            sku = orderResponse.Data.order_items[1].product.sku },
-                    quantity = orderResponse.Data.order_items[1].quantity } },
+                            sku = orderResponse.Data.order_items[0].product.sku },
+                    quantity = orderResponse.Data.order_items[0].quantity } },
                 tracking_codes = new List<string>() { "automation1", "automation2" },
                 tracking_urls = new List<string>() { "tracking.com/automation1", "tracking.com/automation2" }
             };
@@ -151,13 +156,13 @@ namespace Everstox.API.IntegrationTests.OrderFlowIntegrationTests
         private async Task<IRestResponse<Shipment_Response>> SendFirstShipment(Shipment_Request shipment)
         {
             var shipmentService = new ShipmentService();
-            return await shipmentService.CreateShipment(WarehousesData.FinecomQA1_Id, WarehousesData.FinecomQA1_Connector, shipment);
+            return await shipmentService.CreateShipment(WarehousesData.BolecWarehouse_Id, WarehousesData.BolecWarehouse_Connector, shipment) ;
         }
 
         private async Task<IRestResponse<Shipment_Response>> SendSecondShipment(Shipment_Request shipment)
         {
             var shipmentsService = new ShipmentService();
-            return await shipmentsService.CreateShipment(WarehousesData.BolecWarehouse_Id, WarehousesData.BolecWarehouse_Connector, shipment);
+            return await shipmentsService.CreateShipment(WarehousesData.FinecomQA1_Id, WarehousesData.FinecomQA1_Connector, shipment);
         }
 
         private void ValidateShipment(IRestResponse<Shipment_Response> shipment_Response)

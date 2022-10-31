@@ -1,4 +1,5 @@
-﻿using Everstox.API.IntegrationTests.Static_Data;
+﻿using AutoFixture;
+using Everstox.API.IntegrationTests.Static_Data;
 using Everstox.API.Shop.Orders;
 using Everstox.API.Shop.Orders.Models.Request_Models;
 using Everstox.API.Shop.Orders.Models.Response_Models;
@@ -26,13 +27,15 @@ namespace Everstox.API.IntegrationTests.OrderFlowIntegrationTests
         [TestMethod]
         public async Task CreateOrder_SingleOrderItem_Flow_ShouldReturnCorrectStatusCode()
         {
+            var fixture = new Fixture();
+
             var orderRequest = GenerateOrderRequestFromJson("OrderWithSingleFulfillment.json");
             var orderResponse = await CreateOrder(orderRequest);
 
             ValidateOrder(orderRequest, orderResponse);
 
             var fulfillment = CreateFulfillment(orderResponse);
-            var fulfillmentResponse = await AcceptFulfillment(fulfillment);
+            IRestResponse<Fulfillment_Response>? fulfillmentResponse = await AcceptFulfillment(fulfillment);
 
             ValidateFulfillment(fulfillmentResponse);
 

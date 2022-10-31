@@ -1,7 +1,7 @@
-﻿using Everstox.API.Admin.Imports.Models.Response_Models;
-using Everstox.API.Admin.Properties;
+﻿using Everstox.API.Admin.Properties;
 using Everstox.Infrastructure;
 using RestSharp;
+using static Everstox.API.Admin.Models.APIAdminModels;
 
 namespace Everstox.API.Admin.Imports
 {
@@ -12,10 +12,10 @@ namespace Everstox.API.Admin.Imports
 
         public ImportsService(string token = "")
         {
-            _token = string.IsNullOrEmpty(token) ? "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2NTIyNzYzMTgsImlhdCI6MTY0OTY4NDMxOCwic3ViIjoiNmU1ODkzMDQtMDA0ZC00ODVlLTk0NjQtZWJkNWUwMTY4OTFkIn0.IEOqtBbH8rcvCFB7Bx6-fYRn7TX3otOAVizoMy4ZtxQ" : token;
+            _token = string.IsNullOrEmpty(token) ? "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2Njg3NzI4ODUsImlhdCI6MTY2NjE4MDg4NSwic3ViIjoiNmU1ODkzMDQtMDA0ZC00ODVlLTk0NjQtZWJkNWUwMTY4OTFkIn0.OMQgO9NqZ1fCuEGn7rji1bvWJNfyA7TRyxwzXOGQMr0" : token;
         }
 
-        public async Task<IRestResponse<Import_Response>> ReturnLastImportId()
+        public async Task<IRestResponse<Import>> ReturnLastImportId()
         {
             var client = new RestClientHandler($"{EverstoxAdminResources.AdminBaseUrl}/{ImportsUrl}");
             RestRequest request = new RequestBuilder()
@@ -26,10 +26,10 @@ namespace Everstox.API.Admin.Imports
                 .SetHttpMethod(Method.GET)
                 .Build();
 
-            return await client.ExecuteAsync<Import_Response>(request);
+            return await client.ExecuteAsync<Import>(request);
         }
 
-        public async Task<IRestResponse<Import_Response>> ImportsActions(string importId, string action = "retry")
+        public async Task<IRestResponse<Import>> ImportsActions(string importId, string action = "retry")
         {
             var client = new RestClientHandler($"{EverstoxAdminResources.AdminBaseUrl}/{ImportsUrl}/{importId}/{action}");
             RestRequest request = new RequestBuilder()
@@ -38,7 +38,7 @@ namespace Everstox.API.Admin.Imports
                 .SetHttpMethod(Method.POST)
                 .Build();
 
-            return await client.ExecuteAsync<Import_Response>(request);
+            return await client.ExecuteAsync<Import>(request);
         }
     }
 }

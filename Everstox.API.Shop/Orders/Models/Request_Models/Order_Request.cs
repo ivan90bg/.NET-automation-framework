@@ -9,7 +9,8 @@ namespace Everstox.API.Shop.Orders.Models.Request_Models
         public BillingAddress billing_address { get; set; }
         public List<CustomAttribute> custom_attributes { get; set; }
         public string customer_email { get; set; }
-        public string financial_status { get; set; }
+
+        public string financial_status = "paid";
 
         public DateTime order_date = DateTime.UtcNow;
         public List<OrderItem> order_items { get; set; }

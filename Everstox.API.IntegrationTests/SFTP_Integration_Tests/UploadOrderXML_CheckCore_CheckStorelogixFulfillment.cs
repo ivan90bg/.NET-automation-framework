@@ -41,7 +41,7 @@ namespace Everstox.API.IntegrationTests.SFTP_Integration_Tests
             var order_City = XmlOrderSingleValueExtractor(xentralOrderXML, "rechnung_ort");
             var fulfillment_City = XmlFulfillmentsXpathValueExtractor(newFulfillmentName, "Invoicing/Address/City");
 
-            Assert.AreNotEqual(order_City, fulfillment_City, "Mapped values are not the same!");
+            Assert.AreEqual(order_City, fulfillment_City, "Mapped values are not the same!");
 
         }
 
@@ -49,7 +49,7 @@ namespace Everstox.API.IntegrationTests.SFTP_Integration_Tests
         {
             PolicyResult<IRestResponse<OrderList_Response>>? orderResponse = await Policy.Handle<Exception>()
                 .OrResult<IRestResponse<OrderList_Response>>(r => !r.IsSuccessful || r.Data.count < 1)
-                .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
+                .WaitAndRetryAsync(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(3, retryAttempt)),
                     (response, timeSpan, retryAttempt, context) =>
                     {
                         Debug.WriteLine(retryAttempt);

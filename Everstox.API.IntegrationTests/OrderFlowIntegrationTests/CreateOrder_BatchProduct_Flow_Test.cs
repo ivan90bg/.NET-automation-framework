@@ -66,7 +66,7 @@ namespace Everstox.API.IntegrationTests.OrderFlowIntegrationTests
             Assert.AreEqual(HttpStatusCode.Created, orderResponse.StatusCode, orderResponse.Content.ToString());
             Assert.AreEqual(orderRequest.order_priority, orderResponse.Data.order_priority);
             Assert.AreEqual(EnumString.GetStringValue(Fulfillment_State.In_Fullfilment), orderResponse.Data.state);
-            Assert.AreEqual(EnumString.GetStringValue(Warehouse_Names.Finecom), orderResponse.Data.fulfillments[0].warehouse.name);
+            Assert.AreEqual(EnumString.GetStringValue(Warehouse_Names.Bolec_Warehouse), orderResponse.Data.fulfillments[0].warehouse.name);
             Assert.AreEqual("automationbatch", orderResponse.Data.order_items[0].custom_attributes[0].attribute_value);
             Assert.AreEqual(EnumString.GetStringValue(Fulfillment_State.Warehouse_confirmation_pending), orderResponse.Data.fulfillments[0].state);
         }
@@ -79,7 +79,7 @@ namespace Everstox.API.IntegrationTests.OrderFlowIntegrationTests
         private async Task<IRestResponse<Fulfillment_Response>> AcceptFulfillment(List<Fulfillment_Request> fulfillment)
         {
             var fulfillmentService = new FulfillmentsService();
-            return await fulfillmentService.FulfillmentsAction(WarehousesData.FinecomQA1_Id, WarehousesData.FinecomQA1_Connector, fulfillment);
+            return await fulfillmentService.FulfillmentsAction(WarehousesData.BolecWarehouse_Id, WarehousesData.BolecWarehouse_Connector, fulfillment);
         }
 
         private void ValidateFullfilment(IRestResponse<Fulfillment_Response> fulfillmentResponse)
@@ -113,7 +113,7 @@ namespace Everstox.API.IntegrationTests.OrderFlowIntegrationTests
         private async Task<IRestResponse<Shipment_Response>> CreateShipment(Shipment_Request shipment)
         {
             var shipmentService = new ShipmentService();
-            return await shipmentService.CreateShipment(WarehousesData.FinecomQA1_Id, WarehousesData.FinecomQA1_Connector, shipment);           
+            return await shipmentService.CreateShipment(WarehousesData.BolecWarehouse_Id, WarehousesData.BolecWarehouse_Connector, shipment);           
         }
 
         private void ValidateShipment(IRestResponse<Shipment_Response> shipmentResponse)
